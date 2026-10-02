@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "native_smoke_runs": 4,
+  "simulated_seconds_per_run": 1.5,
+  "native_trace_files": 4,
+  "isolated_working_directories": true,
+  "source_pins_unchanged": true,
+  "archived_150s_summary_rows_reproduced": 8,
+  "smoke_note": "INSPIRE full32-observation timing scope and cycles1901--2000 are not reached in1.5s; empty windows retain zero calls and blank latency fields.",
+  "archived_results_changed": false
+}

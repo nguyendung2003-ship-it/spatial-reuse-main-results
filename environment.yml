@@ -1,0 +1,20 @@
+name: spatial-reuse-main
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10.20
+  - gcc_linux-64=12.4.0
+  - gxx_linux-64=12.4.0
+  - pkg-config
+  - patch
+  - libblas=3.11.0=*_openblas
+  - libcblas=3.11.0=*_openblas
+  - liblapack=3.11.0=*_openblas
+  - libopenblas=0.3.33
+  - pip
+  - pip:
+      - numpy==2.2.6
+      - scipy==1.15.3
+      - matplotlib==3.10.9
+      - --extra-index-url https://download.pytorch.org/whl/cpu
+      - torch==2.12.1

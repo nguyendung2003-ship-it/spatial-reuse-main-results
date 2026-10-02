@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "input_matrices": 81,
+  "table_v_rows": 27,
+  "per_seed_rows": 675,
+  "paired_contrasts": 9,
+  "source_table_fields_match": 108,
+  "simulation_rerun": false
+}

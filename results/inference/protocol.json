@@ -1,0 +1,1339 @@
+{
+  "status": "complete",
+  "scope": "frozen steady-state fresh-input CPU inference for the four main learned controllers",
+  "physical_seeds": [
+    1
+  ],
+  "batch_sizes": [
+    1,
+    512
+  ],
+  "feature_dimension": 32,
+  "warmup_per_case_backend_batch_scope": 30,
+  "warmup_per_timing_block": 30,
+  "blocks_per_group": 2,
+  "calls_per_block": 500,
+  "repetitions_per_case_backend_batch_scope": 1000,
+  "timing_order": "deterministically shuffled homogeneous groups, then reverse group order in second pass; each group block has its own warmup followed by contiguous timed calls",
+  "purpose": "measure a prepared, warmed frozen model without cross-backend cache-order confounding",
+  "fresh_feature_forward": "normalized contiguous float32 input -> newly computed features -> float64 CPU output; no feature lookup cache",
+  "fresh_forward_posterior_prediction": "same fresh forward plus dot product with restored fixed Bayesian posterior mean",
+  "excluded": [
+    "model loading",
+    "freeze/fusion/JIT compilation",
+    "normalization of raw AP configurations",
+    "candidate generation",
+    "epsilon exploration",
+    "unseen-history scan",
+    "retraining",
+    "posterior update",
+    "posterior sampling",
+    "ns-3",
+    "IPC",
+    "diagnostics"
+  ],
+  "input_generation": "211 feasible local pairs, VALID_PAIRS/20; rotate 16 independent input banks inside each block; separate correctness inputs include random configurations and all local feasible pairs",
+  "before": {
+    "utc": "2026-10-02T06:24:45.523485+00:00",
+    "cpu_model": "AMD Ryzen 9 9950X3D2 16-Core Processor",
+    "hostname": "ubuntu",
+    "kernel": "7.0.0-34-generic",
+    "affinity": [
+      31
+    ],
+    "loadavg": [
+      1.10546875,
+      1.25146484375,
+      1.31982421875
+    ],
+    "python": "3.10.20",
+    "numpy": "2.2.6",
+    "torch": "2.12.1+cpu",
+    "torch_threads": 1,
+    "torch_interop_threads": 1
+  },
+  "source_sha256": {
+    "neural_bandit_bridge/benchmark_frozen_inference_steady.py": "6177d41177307ac0d53812634a7bc3b9b97b33fc6b1bcf631287e8fe5c025e10",
+    "neural_bandit_bridge/benchmark_frozen_inference.py": "de0e20c8ade043c8b937780118681b8a7c5ac4e8c2f29772a2097876b364c9eb",
+    "neural_bandit_bridge/benchmark_current_inference.py": "1e584be8f86d5dc2fbdafdc1f071d2e23ce89e44fd803a042d4140a552e6b165",
+    "neural_bandit_bridge/nb_server.py": "6f0d6daca762c406f21631aafccb15eb14ead4ad5a015c981ff379acbd133a10",
+    "neural_bandit_bridge/tensor_quantum.py": "282bbc0420320370ade7c87c988b98d13f09282ee9f6cb9b24f514cfb6124276",
+    "neural_bandit_bridge/python_baseline_server.py": "6c369483949a0444a0f1066bc5f67c33cc31ed1604d92a04fcd64a8a14127223",
+    "neural_bandit_bridge/frozen_inference.py": "4432509de070b7fd9a271aea9f557ea933c39b5fd62e0bca5fdd36bbb2d5cd70"
+  },
+  "cases": [
+    {
+      "topology": "C6o",
+      "display_topology": "C6",
+      "method": "Neural Bandit (GM)",
+      "checkpoint": "results/inference/checkpoints/C6o/neural_gm_seed001.pt",
+      "checkpoint_sha256": "9e0e6b8d9027407228d339f0ecdce7c7cd834139c4833cfbd0daa03aba35b4da",
+      "model_state_sha256": "eec44831986814ca3f1b185d98e231864d85043ebdb010231bafbad801d71668",
+      "seed": 1,
+      "input_dim": 12,
+      "feature_dim": 32,
+      "frozen_weights": true,
+      "requires_grad_parameters": 0,
+      "feature_memoization": false,
+      "observations": 631,
+      "train_calls": 45,
+      "backends": [
+        "numpy_frozen_mlp"
+      ],
+      "preparation": [],
+      "validation": [
+        {
+          "backend": "numpy_frozen_mlp",
+          "batch": 1,
+          "max_abs_feature_error": 2.384185791015625e-07,
+          "max_abs_prediction_error": 2.8417155628623902e-08,
+          "posterior_mean_argmax_matches": true
+        },
+        {
+          "backend": "numpy_frozen_mlp",
+          "batch": 512,
+          "max_abs_feature_error": 7.152557373046875e-07,
+          "max_abs_prediction_error": 1.3204881899042675e-07,
+          "posterior_mean_argmax_matches": true
+        }
+      ],
+      "timing_input_sha256": {
+        "1": [
+          "a9b9dc80633c92d2953f772a9de72230f7f435d686d87c36505050b075ccec96",
+          "9d042686a502b09f503cb606b13cc1093bcf31d42e9223269a7aba4ed12f01dd",
+          "4e1fdc0fb2bcc7ff0eb86dcdf5ad1c3567b2b4f122662fadb6a3c20a30fce67e",
+          "f485606869f14986f6ee7e23ba6a16c462923153728944ee8947241fa4c12d3b",
+          "87fb45dc1d814a36d7228e874540b5975fcd593e45dd64a102c14f4478e0c6fe",
+          "d9aeb0810eeef87716690537d89c87ef283e21f847cc4be9d4b9acaed8c4f842",
+          "a2ac508f5819e306ca0d311ff50bda67c69b459ffd625c8d71265329ec5975cc",
+          "49a01ef48e76a1a7e2020db6c22792eb1d80d6e393efaf632717e63f63fa8f89",
+          "4f1d99c30e14537a70562bfd06d83e104966f0fb4ea9706e7f8fc82a382cd2c5",
+          "8a64ad87f1d4dc4d64fd0ceb19ce08fc38420a648b17ed2421d42cd7648d1448",
+          "2b1b1826aa653f44f497685955ebcc86a67494073808bace1eded62a38813826",
+          "1cb9cb5edb846c43fd0a47cda18c14a2f63ae6ad32c8d1312394b468cec9d77a",
+          "9fc87614b04f1981097f965a0e29863c54d40f86c53cd2ef4310250f565e52d9",
+          "891f7272da76c981a309b8873625fb2bb082f69a3a9f6b6eb61b3374c74338e8",
+          "5765e998ee24efa5eba80c0080f9d4a70367d6b0f6d5b9fdfb214091990401c0",
+          "f6b3637adecbf582751613c35a55525ee274e4b0ab8fa32764625cd21195cdff"
+        ],
+        "512": [
+          "e5c79da9d2a2184d5abb25a29089d52ccb934063d921fd57dec984e12c515d3d",
+          "f2e6046a55db7338ecbb8046d070bd62698be87fe94560ca06f5983226af9266",
+          "f21e229d4c0c61533f3ad1be4fc5d5cc8f16546b79e28fcbab114eda6dbdcc65",
+          "da7439f100b5541fe85980da8540ca210fe4e53e7a94bab91785829acc95a23f",
+          "ff641505197d4346161f8cd057d07d4bcda18eef6a562cf48f3e88e21448ebf1",
+          "c3a816754e7d1518d8b26692f567abe7fd7c4bca4a17b313254cf06978935342",
+          "fdcd3fc73ab37b76bcf9d6c3bb6c0855b5b344f63c56c55ec7c4ed5d1e222b56",
+          "555a61b75fdf371227eee2122c61147dac06972dbc56979cf8667a01f5aeb3e8",
+          "4eae8fbfe9181a965f1d2ffddac6546f74ec631b1f89c75fcd4cb8cf17faf1b0",
+          "f77e8724b22f08d1a89137db8af77cf7858644ee81a37d559d8f7ff97b35203f",
+          "be22291bfa5ae170337df84ab29123d277d40cd4616a3b7b1475d00b3ea03e80",
+          "4b9fa7b94c98d67576fe6c3d1cd210dd45c4d3bbfa7d85433c2711e993d30476",
+          "c606b71d8dc449e536b5664bf8d333627897036656b70b625a889b69d30a7a58",
+          "c9abd6123a60f8b38b417f76c7309504d110f72cf0e947aaade2263574b24faf",
+          "4a9555e97318b11835333e0fd5448d16a84b9b7ad8582b82ce2cb1fbe46293a4",
+          "8248f1676c4ec1711654ccf93583d12d7d8be7cedcc88c280c883d43816a8f82"
+        ]
+      },
+      "original_checkpoint": "neural_bandit_bridge/runs/20260923_gm_readout25_mlp_norm_C6o/shards/seed_001/checkpoints/mlp_norm_seed000001_final_n0631.pt",
+      "method_id": "neural_gm",
+      "selected_backend_by_batch": {
+        "1": "numpy_frozen_mlp",
+        "512": "numpy_frozen_mlp"
+      }
+    },
+    {
+      "topology": "C6o",
+      "display_topology": "C6",
+      "method": "QNN Bandit (GM)",
+      "checkpoint": "results/inference/checkpoints/C6o/qnn_gm_seed001.pt",
+      "checkpoint_sha256": "075727d54551f8179fac87378c2f15fb3ef469734053b3361e1920bdec281e55",
+      "model_state_sha256": "b061dd552047cccbf978f0a5d6dff3045aed332c1243abefda822abc3d09af67",
+      "seed": 1,
+      "input_dim": 12,
+      "feature_dim": 32,
+      "frozen_weights": true,
+      "requires_grad_parameters": 0,
+      "feature_memoization": false,
+      "observations": 639,
+      "train_calls": 45,
+      "backends": [
+        "hybrid_native_frozen_fused",
+        "native_frozen_fused"
+      ],
+      "preparation": [
+        {
+          "backend": "specialized_frozen_prepare",
+          "prepare_ms": 70.772101,
+          "compilation": {
+            "native_frozen_fused": {
+              "compiler": "/home/ubuntu/anaconda3/envs/ns3env/bin/x86_64-conda-linux-gnu-c++",
+              "compile_flags": [
+                "-O3",
+                "-march=native",
+                "-ffp-contract=off",
+                "-fPIC",
+                "-shared",
+                "-std=c++17"
+              ],
+              "source_sha256": "741a0e71bee34858cbfcb275e62256fa5f63b21141d894fa1ee521c53e2111dd",
+              "binary": "/tmp/ns3_frozen_qnn_cache/9bff95103aa6623b/frozen_qnn.so",
+              "binary_sha256": "00121f1ff030ed3f16d21337703177a7dd20c417f89ea4b62d72c3ba3a1d99c7",
+              "blas_library": "/home/ubuntu/anaconda3/envs/ns3env/lib/libcblas.so",
+              "compiled_at_initialization": true,
+              "candidate_feature_memoization": false,
+              "fast_math": false
+            },
+            "hybrid_native_frozen_fused": {
+              "compiler": "/home/ubuntu/anaconda3/envs/ns3env/bin/x86_64-conda-linux-gnu-c++",
+              "compile_flags": [
+                "-O3",
+                "-march=native",
+                "-ffp-contract=off",
+                "-fPIC",
+                "-shared",
+                "-std=c++17"
+              ],
+              "source_sha256": "741a0e71bee34858cbfcb275e62256fa5f63b21141d894fa1ee521c53e2111dd",
+              "binary": "/tmp/ns3_frozen_qnn_cache/9bff95103aa6623b/frozen_qnn.so",
+              "binary_sha256": "00121f1ff030ed3f16d21337703177a7dd20c417f89ea4b62d72c3ba3a1d99c7",
+              "blas_library": "/home/ubuntu/anaconda3/envs/ns3env/lib/libcblas.so",
+              "compiled_at_initialization": true,
+              "candidate_feature_memoization": false,
+              "fast_math": false
+            }
+          }
+        }
+      ],
+      "validation": [
+        {
+          "backend": "native_frozen_fused",
+          "batch": 1,
+          "max_abs_feature_error": 1.043081283569336e-06,
+          "max_abs_prediction_error": 4.632198634668683e-07,
+          "posterior_mean_argmax_matches": true
+        },
+        {
+          "backend": "hybrid_native_frozen_fused",
+          "batch": 512,
+          "max_abs_feature_error": 2.7418136596679688e-06,
+          "max_abs_prediction_error": 1.1580407735523046e-06,
+          "posterior_mean_argmax_matches": true
+        }
+      ],
+      "timing_input_sha256": {
+        "1": [
+          "a9b9dc80633c92d2953f772a9de72230f7f435d686d87c36505050b075ccec96",
+          "9d042686a502b09f503cb606b13cc1093bcf31d42e9223269a7aba4ed12f01dd",
+          "4e1fdc0fb2bcc7ff0eb86dcdf5ad1c3567b2b4f122662fadb6a3c20a30fce67e",
+          "f485606869f14986f6ee7e23ba6a16c462923153728944ee8947241fa4c12d3b",
+          "87fb45dc1d814a36d7228e874540b5975fcd593e45dd64a102c14f4478e0c6fe",
+          "d9aeb0810eeef87716690537d89c87ef283e21f847cc4be9d4b9acaed8c4f842",
+          "a2ac508f5819e306ca0d311ff50bda67c69b459ffd625c8d71265329ec5975cc",
+          "49a01ef48e76a1a7e2020db6c22792eb1d80d6e393efaf632717e63f63fa8f89",
+          "4f1d99c30e14537a70562bfd06d83e104966f0fb4ea9706e7f8fc82a382cd2c5",
+          "8a64ad87f1d4dc4d64fd0ceb19ce08fc38420a648b17ed2421d42cd7648d1448",
+          "2b1b1826aa653f44f497685955ebcc86a67494073808bace1eded62a38813826",
+          "1cb9cb5edb846c43fd0a47cda18c14a2f63ae6ad32c8d1312394b468cec9d77a",
+          "9fc87614b04f1981097f965a0e29863c54d40f86c53cd2ef4310250f565e52d9",
+          "891f7272da76c981a309b8873625fb2bb082f69a3a9f6b6eb61b3374c74338e8",
+          "5765e998ee24efa5eba80c0080f9d4a70367d6b0f6d5b9fdfb214091990401c0",
+          "f6b3637adecbf582751613c35a55525ee274e4b0ab8fa32764625cd21195cdff"
+        ],
+        "512": [
+          "e5c79da9d2a2184d5abb25a29089d52ccb934063d921fd57dec984e12c515d3d",
+          "f2e6046a55db7338ecbb8046d070bd62698be87fe94560ca06f5983226af9266",
+          "f21e229d4c0c61533f3ad1be4fc5d5cc8f16546b79e28fcbab114eda6dbdcc65",
+          "da7439f100b5541fe85980da8540ca210fe4e53e7a94bab91785829acc95a23f",
+          "ff641505197d4346161f8cd057d07d4bcda18eef6a562cf48f3e88e21448ebf1",
+          "c3a816754e7d1518d8b26692f567abe7fd7c4bca4a17b313254cf06978935342",
+          "fdcd3fc73ab37b76bcf9d6c3bb6c0855b5b344f63c56c55ec7c4ed5d1e222b56",
+          "555a61b75fdf371227eee2122c61147dac06972dbc56979cf8667a01f5aeb3e8",
+          "4eae8fbfe9181a965f1d2ffddac6546f74ec631b1f89c75fcd4cb8cf17faf1b0",
+          "f77e8724b22f08d1a89137db8af77cf7858644ee81a37d559d8f7ff97b35203f",
+          "be22291bfa5ae170337df84ab29123d277d40cd4616a3b7b1475d00b3ea03e80",
+          "4b9fa7b94c98d67576fe6c3d1cd210dd45c4d3bbfa7d85433c2711e993d30476",
+          "c606b71d8dc449e536b5664bf8d333627897036656b70b625a889b69d30a7a58",
+          "c9abd6123a60f8b38b417f76c7309504d110f72cf0e947aaade2263574b24faf",
+          "4a9555e97318b11835333e0fd5448d16a84b9b7ad8582b82ce2cb1fbe46293a4",
+          "8248f1676c4ec1711654ccf93583d12d7d8be7cedcc88c280c883d43816a8f82"
+        ]
+      },
+      "original_checkpoint": "neural_bandit_bridge/runs/20260921_arpfix2000_qnn_hgmt_C6o/shards/seed_001/checkpoints/qnn_seed000001_final_n0639.pt",
+      "method_id": "qnn_gm",
+      "selected_backend_by_batch": {
+        "1": "native_frozen_fused",
+        "512": "hybrid_native_frozen_fused"
+      }
+    },
+    {
+      "topology": "C6o",
+      "display_topology": "C6",
+      "method": "Neural Bandit (HCM)",
+      "checkpoint": "results/inference/checkpoints/C6o/neural_hcm_seed001.pt",
+      "checkpoint_sha256": "32f6d85916a886049011ca03c0e19ea5c8363c8d440acdad8f59623a8a9abe3a",
+      "model_state_sha256": "1662492162896edc36ceb0ccf94ca2c03e5ccd8bf36d51d9efc3bf09101a6c7e",
+      "seed": 1,
+      "input_dim": 12,
+      "feature_dim": 32,
+      "frozen_weights": true,
+      "requires_grad_parameters": 0,
+      "feature_memoization": false,
+      "observations": 667,
+      "train_calls": 47,
+      "backends": [
+        "numpy_frozen_mlp"
+      ],
+      "preparation": [],
+      "validation": [
+        {
+          "backend": "numpy_frozen_mlp",
+          "batch": 1,
+          "max_abs_feature_error": 1.1920928955078125e-07,
+          "max_abs_prediction_error": 6.034264865562022e-09,
+          "posterior_mean_argmax_matches": true
+        },
+        {
+          "backend": "numpy_frozen_mlp",
+          "batch": 512,
+          "max_abs_feature_error": 7.152557373046875e-07,
+          "max_abs_prediction_error": 1.3070488558142301e-07,
+          "posterior_mean_argmax_matches": true
+        }
+      ],
+      "timing_input_sha256": {
+        "1": [
+          "a9b9dc80633c92d2953f772a9de72230f7f435d686d87c36505050b075ccec96",
+          "9d042686a502b09f503cb606b13cc1093bcf31d42e9223269a7aba4ed12f01dd",
+          "4e1fdc0fb2bcc7ff0eb86dcdf5ad1c3567b2b4f122662fadb6a3c20a30fce67e",
+          "f485606869f14986f6ee7e23ba6a16c462923153728944ee8947241fa4c12d3b",
+          "87fb45dc1d814a36d7228e874540b5975fcd593e45dd64a102c14f4478e0c6fe",
+          "d9aeb0810eeef87716690537d89c87ef283e21f847cc4be9d4b9acaed8c4f842",
+          "a2ac508f5819e306ca0d311ff50bda67c69b459ffd625c8d71265329ec5975cc",
+          "49a01ef48e76a1a7e2020db6c22792eb1d80d6e393efaf632717e63f63fa8f89",
+          "4f1d99c30e14537a70562bfd06d83e104966f0fb4ea9706e7f8fc82a382cd2c5",
+          "8a64ad87f1d4dc4d64fd0ceb19ce08fc38420a648b17ed2421d42cd7648d1448",
+          "2b1b1826aa653f44f497685955ebcc86a67494073808bace1eded62a38813826",
+          "1cb9cb5edb846c43fd0a47cda18c14a2f63ae6ad32c8d1312394b468cec9d77a",
+          "9fc87614b04f1981097f965a0e29863c54d40f86c53cd2ef4310250f565e52d9",
+          "891f7272da76c981a309b8873625fb2bb082f69a3a9f6b6eb61b3374c74338e8",
+          "5765e998ee24efa5eba80c0080f9d4a70367d6b0f6d5b9fdfb214091990401c0",
+          "f6b3637adecbf582751613c35a55525ee274e4b0ab8fa32764625cd21195cdff"
+        ],
+        "512": [
+          "e5c79da9d2a2184d5abb25a29089d52ccb934063d921fd57dec984e12c515d3d",
+          "f2e6046a55db7338ecbb8046d070bd62698be87fe94560ca06f5983226af9266",
+          "f21e229d4c0c61533f3ad1be4fc5d5cc8f16546b79e28fcbab114eda6dbdcc65",
+          "da7439f100b5541fe85980da8540ca210fe4e53e7a94bab91785829acc95a23f",
+          "ff641505197d4346161f8cd057d07d4bcda18eef6a562cf48f3e88e21448ebf1",
+          "c3a816754e7d1518d8b26692f567abe7fd7c4bca4a17b313254cf06978935342",
+          "fdcd3fc73ab37b76bcf9d6c3bb6c0855b5b344f63c56c55ec7c4ed5d1e222b56",
+          "555a61b75fdf371227eee2122c61147dac06972dbc56979cf8667a01f5aeb3e8",
+          "4eae8fbfe9181a965f1d2ffddac6546f74ec631b1f89c75fcd4cb8cf17faf1b0",
+          "f77e8724b22f08d1a89137db8af77cf7858644ee81a37d559d8f7ff97b35203f",
+          "be22291bfa5ae170337df84ab29123d277d40cd4616a3b7b1475d00b3ea03e80",
+          "4b9fa7b94c98d67576fe6c3d1cd210dd45c4d3bbfa7d85433c2711e993d30476",
+          "c606b71d8dc449e536b5664bf8d333627897036656b70b625a889b69d30a7a58",
+          "c9abd6123a60f8b38b417f76c7309504d110f72cf0e947aaade2263574b24faf",
+          "4a9555e97318b11835333e0fd5448d16a84b9b7ad8582b82ce2cb1fbe46293a4",
+          "8248f1676c4ec1711654ccf93583d12d7d8be7cedcc88c280c883d43816a8f82"
+        ]
+      },
+      "original_checkpoint": "neural_bandit_bridge/runs/20261001_neural_hcm_mlp_norm_eps01_C6o/shards/seed_001/checkpoints/mlp_norm_seed000001_final_n0667.pt",
+      "method_id": "neural_hcm",
+      "selected_backend_by_batch": {
+        "1": "numpy_frozen_mlp",
+        "512": "numpy_frozen_mlp"
+      }
+    },
+    {
+      "topology": "C6o",
+      "display_topology": "C6",
+      "method": "QNN Bandit (HCM)",
+      "checkpoint": "results/inference/checkpoints/C6o/qnn_hcm_seed001.pt",
+      "checkpoint_sha256": "ea4ba299273bb0362ec9a525901c197d064e69df0ada9b2b6975a4100b4efc62",
+      "model_state_sha256": "2c083332ebbd27d739e22d89f1a465dbd2942e258e2a8f52b6db2a0828dcd59e",
+      "seed": 1,
+      "input_dim": 12,
+      "feature_dim": 32,
+      "frozen_weights": true,
+      "requires_grad_parameters": 0,
+      "feature_memoization": false,
+      "observations": 667,
+      "train_calls": 47,
+      "backends": [
+        "hybrid_native_frozen_fused",
+        "native_frozen_fused"
+      ],
+      "preparation": [
+        {
+          "backend": "specialized_frozen_prepare",
+          "prepare_ms": 70.449286,
+          "compilation": {
+            "native_frozen_fused": {
+              "compiler": "/home/ubuntu/anaconda3/envs/ns3env/bin/x86_64-conda-linux-gnu-c++",
+              "compile_flags": [
+                "-O3",
+                "-march=native",
+                "-ffp-contract=off",
+                "-fPIC",
+                "-shared",
+                "-std=c++17"
+              ],
+              "source_sha256": "741a0e71bee34858cbfcb275e62256fa5f63b21141d894fa1ee521c53e2111dd",
+              "binary": "/tmp/ns3_frozen_qnn_cache/9bff95103aa6623b/frozen_qnn.so",
+              "binary_sha256": "00121f1ff030ed3f16d21337703177a7dd20c417f89ea4b62d72c3ba3a1d99c7",
+              "blas_library": "/home/ubuntu/anaconda3/envs/ns3env/lib/libcblas.so",
+              "compiled_at_initialization": true,
+              "candidate_feature_memoization": false,
+              "fast_math": false
+            },
+            "hybrid_native_frozen_fused": {
+              "compiler": "/home/ubuntu/anaconda3/envs/ns3env/bin/x86_64-conda-linux-gnu-c++",
+              "compile_flags": [
+                "-O3",
+                "-march=native",
+                "-ffp-contract=off",
+                "-fPIC",
+                "-shared",
+                "-std=c++17"
+              ],
+              "source_sha256": "741a0e71bee34858cbfcb275e62256fa5f63b21141d894fa1ee521c53e2111dd",
+              "binary": "/tmp/ns3_frozen_qnn_cache/9bff95103aa6623b/frozen_qnn.so",
+              "binary_sha256": "00121f1ff030ed3f16d21337703177a7dd20c417f89ea4b62d72c3ba3a1d99c7",
+              "blas_library": "/home/ubuntu/anaconda3/envs/ns3env/lib/libcblas.so",
+              "compiled_at_initialization": true,
+              "candidate_feature_memoization": false,
+              "fast_math": false
+            }
+          }
+        }
+      ],
+      "validation": [
+        {
+          "backend": "native_frozen_fused",
+          "batch": 1,
+          "max_abs_feature_error": 1.4603137969970703e-06,
+          "max_abs_prediction_error": 1.0075387346653031e-07,
+          "posterior_mean_argmax_matches": true
+        },
+        {
+          "backend": "hybrid_native_frozen_fused",
+          "batch": 512,
+          "max_abs_feature_error": 4.298985004425049e-06,
+          "max_abs_prediction_error": 1.3682173137796738e-06,
+          "posterior_mean_argmax_matches": true
+        }
+      ],
+      "timing_input_sha256": {
+        "1": [
+          "a9b9dc80633c92d2953f772a9de72230f7f435d686d87c36505050b075ccec96",
+          "9d042686a502b09f503cb606b13cc1093bcf31d42e9223269a7aba4ed12f01dd",
+          "4e1fdc0fb2bcc7ff0eb86dcdf5ad1c3567b2b4f122662fadb6a3c20a30fce67e",
+          "f485606869f14986f6ee7e23ba6a16c462923153728944ee8947241fa4c12d3b",
+          "87fb45dc1d814a36d7228e874540b5975fcd593e45dd64a102c14f4478e0c6fe",
+          "d9aeb0810eeef87716690537d89c87ef283e21f847cc4be9d4b9acaed8c4f842",
+          "a2ac508f5819e306ca0d311ff50bda67c69b459ffd625c8d71265329ec5975cc",
+          "49a01ef48e76a1a7e2020db6c22792eb1d80d6e393efaf632717e63f63fa8f89",
+          "4f1d99c30e14537a70562bfd06d83e104966f0fb4ea9706e7f8fc82a382cd2c5",
+          "8a64ad87f1d4dc4d64fd0ceb19ce08fc38420a648b17ed2421d42cd7648d1448",
+          "2b1b1826aa653f44f497685955ebcc86a67494073808bace1eded62a38813826",
+          "1cb9cb5edb846c43fd0a47cda18c14a2f63ae6ad32c8d1312394b468cec9d77a",
+          "9fc87614b04f1981097f965a0e29863c54d40f86c53cd2ef4310250f565e52d9",
+          "891f7272da76c981a309b8873625fb2bb082f69a3a9f6b6eb61b3374c74338e8",
+          "5765e998ee24efa5eba80c0080f9d4a70367d6b0f6d5b9fdfb214091990401c0",
+          "f6b3637adecbf582751613c35a55525ee274e4b0ab8fa32764625cd21195cdff"
+        ],
+        "512": [
+          "e5c79da9d2a2184d5abb25a29089d52ccb934063d921fd57dec984e12c515d3d",
+          "f2e6046a55db7338ecbb8046d070bd62698be87fe94560ca06f5983226af9266",
+          "f21e229d4c0c61533f3ad1be4fc5d5cc8f16546b79e28fcbab114eda6dbdcc65",
+          "da7439f100b5541fe85980da8540ca210fe4e53e7a94bab91785829acc95a23f",
+          "ff641505197d4346161f8cd057d07d4bcda18eef6a562cf48f3e88e21448ebf1",
+          "c3a816754e7d1518d8b26692f567abe7fd7c4bca4a17b313254cf06978935342",
+          "fdcd3fc73ab37b76bcf9d6c3bb6c0855b5b344f63c56c55ec7c4ed5d1e222b56",
+          "555a61b75fdf371227eee2122c61147dac06972dbc56979cf8667a01f5aeb3e8",
+          "4eae8fbfe9181a965f1d2ffddac6546f74ec631b1f89c75fcd4cb8cf17faf1b0",
+          "f77e8724b22f08d1a89137db8af77cf7858644ee81a37d559d8f7ff97b35203f",
+          "be22291bfa5ae170337df84ab29123d277d40cd4616a3b7b1475d00b3ea03e80",
+          "4b9fa7b94c98d67576fe6c3d1cd210dd45c4d3bbfa7d85433c2711e993d30476",
+          "c606b71d8dc449e536b5664bf8d333627897036656b70b625a889b69d30a7a58",
+          "c9abd6123a60f8b38b417f76c7309504d110f72cf0e947aaade2263574b24faf",
+          "4a9555e97318b11835333e0fd5448d16a84b9b7ad8582b82ce2cb1fbe46293a4",
+          "8248f1676c4ec1711654ccf93583d12d7d8be7cedcc88c280c883d43816a8f82"
+        ]
+      },
+      "original_checkpoint": "neural_bandit_bridge/runs/20260921_arpfix2000_qnn_hcm_C6o/shards/seed_001/checkpoints/qnn_seed000001_final_n0667.pt",
+      "method_id": "qnn_hcm",
+      "selected_backend_by_batch": {
+        "1": "native_frozen_fused",
+        "512": "hybrid_native_frozen_fused"
+      }
+    },
+    {
+      "topology": "MER_FLOORS_CH20_S5",
+      "display_topology": "ENT-Clustered",
+      "method": "Neural Bandit (GM)",
+      "checkpoint": "results/inference/checkpoints/MER_FLOORS_CH20_S5/neural_gm_seed001.pt",
+      "checkpoint_sha256": "83617a7067308c9d823f05ed0b743cf81496bfee4bf02501fcccc675f6fd9a52",
+      "model_state_sha256": "2a4c18b9a576205a82e956214f892118b6375eacaccf06cb3873f3d93b51dcc2",
+      "seed": 1,
+      "input_dim": 20,
+      "feature_dim": 32,
+      "frozen_weights": true,
+      "requires_grad_parameters": 0,
+      "feature_memoization": false,
+      "observations": 655,
+      "train_calls": 46,
+      "backends": [
+        "numpy_frozen_mlp"
+      ],
+      "preparation": [],
+      "validation": [
+        {
+          "backend": "numpy_frozen_mlp",
+          "batch": 1,
+          "max_abs_feature_error": 3.5762786865234375e-07,
+          "max_abs_prediction_error": 1.032145402479756e-07,
+          "posterior_mean_argmax_matches": true
+        },
+        {
+          "backend": "numpy_frozen_mlp",
+          "batch": 512,
+          "max_abs_feature_error": 5.960464477539062e-07,
+          "max_abs_prediction_error": 1.3363149786727035e-07,
+          "posterior_mean_argmax_matches": true
+        }
+      ],
+      "timing_input_sha256": {
+        "1": [
+          "fcebb7de5a1437a5a78428be779b7cc53b7ed390e7de83eb0b59456de2d43cef",
+          "0fc665b0b0c479b1099fdce9fea80ce6d7c348ae80b490db6adb3a541074147c",
+          "9854f60044d77edc647b0a47098b4559af2a5ed5dfed1492d660a8f3202d7271",
+          "1532d604d032f486d0d7ace73ca8ae7e577c71be50d790a8a20365d8da5d1031",
+          "171b842cdb37215657e11883c54b135c05ef466ff6668af331f5f7056d6028b8",
+          "7e78479621cca93393841d96e2e3baa96a7e46cb2b3009a6c98ac6aaa0fc0c2e",
+          "b3fbcfaa9122087714ce77afadaf85fcf5acb4daf06bdc887cb1b12a49dbeb98",
+          "1a75f3fba5b1afdedd0002d4ebbadc74d7606d22b71b9a0db1c2d4fb653e0ebe",
+          "7c9bb43b11a863be481548e53fbd76608729eede60b4762bb802f23b569be730",
+          "96f309e9580e579e7dc3bb9f45aaac640108eda133b21f9e0ff3ec2a045f244d",
+          "1bf203b0126a5c0f177faaa2a90c714d3c88bec8aec8204ed1079f341c9e657f",
+          "0664b662ece9bd9da890b98bb9151d53e072217dc96398fde423f8fedecad6b1",
+          "98f3a331461e1b4acd312362ec350a99004fb43ae2f61ef3c2dbaa0604fdc262",
+          "4b2699ba9e19b40bf6fe4db948cdeb13029415723e2e53a74381ae24df7b0301",
+          "ebc51a359116517c6683f0bb25028742503c79a89fb17442e58f6126ccc23105",
+          "a65c42ad2596e3700960b49aae785179f691d4aef337df8446963b245d45978b"
+        ],
+        "512": [
+          "529558c5a71a66c2111fcac9b29443245ea3484500fa3cf11fa8feb563766705",
+          "464afc40e709648ee77f605ca74e03e142800f8955e3397cef1d195966a0bdf9",
+          "7cafbbba94656cc5cddd1408f6a354d6d32b62e1521083b887aed06aaf5f5328",
+          "7c174e40c692b12bfa1beddf8cd8655c20ac83eb47488d42cdc85a1118cf988e",
+          "fd994e5df5d98a7597ef6e897506fb92bcf768b1fa863c9c34283ba52ca82175",
+          "96876ee3a9b235dd3fda999d986c4b5e158fb1d8ce9c42e3c4d8e091b4136b1a",
+          "89eee7c3c2e3462dd25ec6f9378424c933617b55d05558aa5962e5f6933ff689",
+          "e5d6ed95fd90ba2ac5dd4cf7f79fc8b781025a493c95ca1841394972a52fab43",
+          "f22ded0f88093853ebc1d2d8e817ecdbb01cf9d2a04de904c9a14584229a3917",
+          "b03553f8d2baab937bc61b160046d3453634b9fbfe551a95e7424a01080d4b9c",
+          "e717c5be39d4ad88ae8233643b1f7460647b210586df131d3e44ba203952cc80",
+          "0671d94e33bfcc3d80be01846591244f4f430e52b22a7042c06f8cf982e7b3ae",
+          "e922bb59a0d98107ccad469ab4778987574008c67342b82a0c9c5e63515db8c6",
+          "104386f7f31f9783e2b4e97e94c8d0e59eff225053db0daac8703150fb24cb8b",
+          "78feabce74e3e7d2048bec76f4d46f35bb2be298a7783f75527853e5f971a987",
+          "62bf259490bdcbba669aa2f0a384048392c1ec3c6de06e05df182130b250347f"
+        ]
+      },
+      "original_checkpoint": "neural_bandit_bridge/runs/20260923_gm_readout25_mlp_norm_CH20/shards/seed_001/checkpoints/mlp_norm_seed000001_final_n0655.pt",
+      "method_id": "neural_gm",
+      "selected_backend_by_batch": {
+        "1": "numpy_frozen_mlp",
+        "512": "numpy_frozen_mlp"
+      }
+    },
+    {
+      "topology": "MER_FLOORS_CH20_S5",
+      "display_topology": "ENT-Clustered",
+      "method": "QNN Bandit (GM)",
+      "checkpoint": "results/inference/checkpoints/MER_FLOORS_CH20_S5/qnn_gm_seed001.pt",
+      "checkpoint_sha256": "4ff7ceb369d3ddc2c00bdec5d159dff7c2a8a65b139d3e7c85618e9f966b056f",
+      "model_state_sha256": "972455c7411dddf02635de302c7b759c36d2eee734c2e4a6c012937b7416dbfc",
+      "seed": 1,
+      "input_dim": 20,
+      "feature_dim": 32,
+      "frozen_weights": true,
+      "requires_grad_parameters": 0,
+      "feature_memoization": false,
+      "observations": 633,
+      "train_calls": 45,
+      "backends": [
+        "hybrid_native_frozen_fused",
+        "native_frozen_fused"
+      ],
+      "preparation": [
+        {
+          "backend": "specialized_frozen_prepare",
+          "prepare_ms": 69.91706,
+          "compilation": {
+            "native_frozen_fused": {
+              "compiler": "/home/ubuntu/anaconda3/envs/ns3env/bin/x86_64-conda-linux-gnu-c++",
+              "compile_flags": [
+                "-O3",
+                "-march=native",
+                "-ffp-contract=off",
+                "-fPIC",
+                "-shared",
+                "-std=c++17"
+              ],
+              "source_sha256": "741a0e71bee34858cbfcb275e62256fa5f63b21141d894fa1ee521c53e2111dd",
+              "binary": "/tmp/ns3_frozen_qnn_cache/9bff95103aa6623b/frozen_qnn.so",
+              "binary_sha256": "00121f1ff030ed3f16d21337703177a7dd20c417f89ea4b62d72c3ba3a1d99c7",
+              "blas_library": "/home/ubuntu/anaconda3/envs/ns3env/lib/libcblas.so",
+              "compiled_at_initialization": true,
+              "candidate_feature_memoization": false,
+              "fast_math": false
+            },
+            "hybrid_native_frozen_fused": {
+              "compiler": "/home/ubuntu/anaconda3/envs/ns3env/bin/x86_64-conda-linux-gnu-c++",
+              "compile_flags": [
+                "-O3",
+                "-march=native",
+                "-ffp-contract=off",
+                "-fPIC",
+                "-shared",
+                "-std=c++17"
+              ],
+              "source_sha256": "741a0e71bee34858cbfcb275e62256fa5f63b21141d894fa1ee521c53e2111dd",
+              "binary": "/tmp/ns3_frozen_qnn_cache/9bff95103aa6623b/frozen_qnn.so",
+              "binary_sha256": "00121f1ff030ed3f16d21337703177a7dd20c417f89ea4b62d72c3ba3a1d99c7",
+              "blas_library": "/home/ubuntu/anaconda3/envs/ns3env/lib/libcblas.so",
+              "compiled_at_initialization": true,
+              "candidate_feature_memoization": false,
+              "fast_math": false
+            }
+          }
+        }
+      ],
+      "validation": [
+        {
+          "backend": "native_frozen_fused",
+          "batch": 1,
+          "max_abs_feature_error": 4.76837158203125e-07,
+          "max_abs_prediction_error": 5.159621863093378e-08,
+          "posterior_mean_argmax_matches": true
+        },
+        {
+          "backend": "hybrid_native_frozen_fused",
+          "batch": 512,
+          "max_abs_feature_error": 3.516674041748047e-06,
+          "max_abs_prediction_error": 5.755730008161208e-07,
+          "posterior_mean_argmax_matches": true
+        }
+      ],
+      "timing_input_sha256": {
+        "1": [
+          "fcebb7de5a1437a5a78428be779b7cc53b7ed390e7de83eb0b59456de2d43cef",
+          "0fc665b0b0c479b1099fdce9fea80ce6d7c348ae80b490db6adb3a541074147c",
+          "9854f60044d77edc647b0a47098b4559af2a5ed5dfed1492d660a8f3202d7271",
+          "1532d604d032f486d0d7ace73ca8ae7e577c71be50d790a8a20365d8da5d1031",
+          "171b842cdb37215657e11883c54b135c05ef466ff6668af331f5f7056d6028b8",
+          "7e78479621cca93393841d96e2e3baa96a7e46cb2b3009a6c98ac6aaa0fc0c2e",
+          "b3fbcfaa9122087714ce77afadaf85fcf5acb4daf06bdc887cb1b12a49dbeb98",
+          "1a75f3fba5b1afdedd0002d4ebbadc74d7606d22b71b9a0db1c2d4fb653e0ebe",
+          "7c9bb43b11a863be481548e53fbd76608729eede60b4762bb802f23b569be730",
+          "96f309e9580e579e7dc3bb9f45aaac640108eda133b21f9e0ff3ec2a045f244d",
+          "1bf203b0126a5c0f177faaa2a90c714d3c88bec8aec8204ed1079f341c9e657f",
+          "0664b662ece9bd9da890b98bb9151d53e072217dc96398fde423f8fedecad6b1",
+          "98f3a331461e1b4acd312362ec350a99004fb43ae2f61ef3c2dbaa0604fdc262",
+          "4b2699ba9e19b40bf6fe4db948cdeb13029415723e2e53a74381ae24df7b0301",
+          "ebc51a359116517c6683f0bb25028742503c79a89fb17442e58f6126ccc23105",
+          "a65c42ad2596e3700960b49aae785179f691d4aef337df8446963b245d45978b"
+        ],
+        "512": [
+          "529558c5a71a66c2111fcac9b29443245ea3484500fa3cf11fa8feb563766705",
+          "464afc40e709648ee77f605ca74e03e142800f8955e3397cef1d195966a0bdf9",
+          "7cafbbba94656cc5cddd1408f6a354d6d32b62e1521083b887aed06aaf5f5328",
+          "7c174e40c692b12bfa1beddf8cd8655c20ac83eb47488d42cdc85a1118cf988e",
+          "fd994e5df5d98a7597ef6e897506fb92bcf768b1fa863c9c34283ba52ca82175",
+          "96876ee3a9b235dd3fda999d986c4b5e158fb1d8ce9c42e3c4d8e091b4136b1a",
+          "89eee7c3c2e3462dd25ec6f9378424c933617b55d05558aa5962e5f6933ff689",
+          "e5d6ed95fd90ba2ac5dd4cf7f79fc8b781025a493c95ca1841394972a52fab43",
+          "f22ded0f88093853ebc1d2d8e817ecdbb01cf9d2a04de904c9a14584229a3917",
+          "b03553f8d2baab937bc61b160046d3453634b9fbfe551a95e7424a01080d4b9c",
+          "e717c5be39d4ad88ae8233643b1f7460647b210586df131d3e44ba203952cc80",
+          "0671d94e33bfcc3d80be01846591244f4f430e52b22a7042c06f8cf982e7b3ae",
+          "e922bb59a0d98107ccad469ab4778987574008c67342b82a0c9c5e63515db8c6",
+          "104386f7f31f9783e2b4e97e94c8d0e59eff225053db0daac8703150fb24cb8b",
+          "78feabce74e3e7d2048bec76f4d46f35bb2be298a7783f75527853e5f971a987",
+          "62bf259490bdcbba669aa2f0a384048392c1ec3c6de06e05df182130b250347f"
+        ]
+      },
+      "original_checkpoint": "neural_bandit_bridge/runs/20260919_arpfix_full25_qnn_hgmt_CH20/shards/seed_001/checkpoints/qnn_seed000001_final_n0633.pt",
+      "method_id": "qnn_gm",
+      "selected_backend_by_batch": {
+        "1": "native_frozen_fused",
+        "512": "hybrid_native_frozen_fused"
+      }
+    },
+    {
+      "topology": "MER_FLOORS_CH20_S5",
+      "display_topology": "ENT-Clustered",
+      "method": "Neural Bandit (HCM)",
+      "checkpoint": "results/inference/checkpoints/MER_FLOORS_CH20_S5/neural_hcm_seed001.pt",
+      "checkpoint_sha256": "9aca99ceb61cd17e199e13452c3b5a0cf80331761e96867bb718bbce6655295f",
+      "model_state_sha256": "cfc00f1eea2da3dc80442b1781b4558d25d2bfec6df691dd8c22f2f0c17deca2",
+      "seed": 1,
+      "input_dim": 20,
+      "feature_dim": 32,
+      "frozen_weights": true,
+      "requires_grad_parameters": 0,
+      "feature_memoization": false,
+      "observations": 667,
+      "train_calls": 47,
+      "backends": [
+        "numpy_frozen_mlp"
+      ],
+      "preparation": [],
+      "validation": [
+        {
+          "backend": "numpy_frozen_mlp",
+          "batch": 1,
+          "max_abs_feature_error": 1.7881393432617188e-07,
+          "max_abs_prediction_error": 1.0145711537568047e-07,
+          "posterior_mean_argmax_matches": true
+        },
+        {
+          "backend": "numpy_frozen_mlp",
+          "batch": 512,
+          "max_abs_feature_error": 4.76837158203125e-07,
+          "max_abs_prediction_error": 1.2691202522230327e-07,
+          "posterior_mean_argmax_matches": true
+        }
+      ],
+      "timing_input_sha256": {
+        "1": [
+          "fcebb7de5a1437a5a78428be779b7cc53b7ed390e7de83eb0b59456de2d43cef",
+          "0fc665b0b0c479b1099fdce9fea80ce6d7c348ae80b490db6adb3a541074147c",
+          "9854f60044d77edc647b0a47098b4559af2a5ed5dfed1492d660a8f3202d7271",
+          "1532d604d032f486d0d7ace73ca8ae7e577c71be50d790a8a20365d8da5d1031",
+          "171b842cdb37215657e11883c54b135c05ef466ff6668af331f5f7056d6028b8",
+          "7e78479621cca93393841d96e2e3baa96a7e46cb2b3009a6c98ac6aaa0fc0c2e",
+          "b3fbcfaa9122087714ce77afadaf85fcf5acb4daf06bdc887cb1b12a49dbeb98",
+          "1a75f3fba5b1afdedd0002d4ebbadc74d7606d22b71b9a0db1c2d4fb653e0ebe",
+          "7c9bb43b11a863be481548e53fbd76608729eede60b4762bb802f23b569be730",
+          "96f309e9580e579e7dc3bb9f45aaac640108eda133b21f9e0ff3ec2a045f244d",
+          "1bf203b0126a5c0f177faaa2a90c714d3c88bec8aec8204ed1079f341c9e657f",
+          "0664b662ece9bd9da890b98bb9151d53e072217dc96398fde423f8fedecad6b1",
+          "98f3a331461e1b4acd312362ec350a99004fb43ae2f61ef3c2dbaa0604fdc262",
+          "4b2699ba9e19b40bf6fe4db948cdeb13029415723e2e53a74381ae24df7b0301",
+          "ebc51a359116517c6683f0bb25028742503c79a89fb17442e58f6126ccc23105",
+          "a65c42ad2596e3700960b49aae785179f691d4aef337df8446963b245d45978b"
+        ],
+        "512": [
+          "529558c5a71a66c2111fcac9b29443245ea3484500fa3cf11fa8feb563766705",
+          "464afc40e709648ee77f605ca74e03e142800f8955e3397cef1d195966a0bdf9",
+          "7cafbbba94656cc5cddd1408f6a354d6d32b62e1521083b887aed06aaf5f5328",
+          "7c174e40c692b12bfa1beddf8cd8655c20ac83eb47488d42cdc85a1118cf988e",
+          "fd994e5df5d98a7597ef6e897506fb92bcf768b1fa863c9c34283ba52ca82175",
+          "96876ee3a9b235dd3fda999d986c4b5e158fb1d8ce9c42e3c4d8e091b4136b1a",
+          "89eee7c3c2e3462dd25ec6f9378424c933617b55d05558aa5962e5f6933ff689",
+          "e5d6ed95fd90ba2ac5dd4cf7f79fc8b781025a493c95ca1841394972a52fab43",
+          "f22ded0f88093853ebc1d2d8e817ecdbb01cf9d2a04de904c9a14584229a3917",
+          "b03553f8d2baab937bc61b160046d3453634b9fbfe551a95e7424a01080d4b9c",
+          "e717c5be39d4ad88ae8233643b1f7460647b210586df131d3e44ba203952cc80",
+          "0671d94e33bfcc3d80be01846591244f4f430e52b22a7042c06f8cf982e7b3ae",
+          "e922bb59a0d98107ccad469ab4778987574008c67342b82a0c9c5e63515db8c6",
+          "104386f7f31f9783e2b4e97e94c8d0e59eff225053db0daac8703150fb24cb8b",
+          "78feabce74e3e7d2048bec76f4d46f35bb2be298a7783f75527853e5f971a987",
+          "62bf259490bdcbba669aa2f0a384048392c1ec3c6de06e05df182130b250347f"
+        ]
+      },
+      "original_checkpoint": "neural_bandit_bridge/runs/20261001_neural_hcm_mlp_norm_eps01_CH20/shards/seed_001/checkpoints/mlp_norm_seed000001_final_n0667.pt",
+      "method_id": "neural_hcm",
+      "selected_backend_by_batch": {
+        "1": "numpy_frozen_mlp",
+        "512": "numpy_frozen_mlp"
+      }
+    },
+    {
+      "topology": "MER_FLOORS_CH20_S5",
+      "display_topology": "ENT-Clustered",
+      "method": "QNN Bandit (HCM)",
+      "checkpoint": "results/inference/checkpoints/MER_FLOORS_CH20_S5/qnn_hcm_seed001.pt",
+      "checkpoint_sha256": "914262d4a385f27e1d8af974f44cf45168a62fb7c723bae1e3a96b22fa1e39da",
+      "model_state_sha256": "526c4feadfffe0f9fd16001511082004021419bb3d9dc152444b9d3456b28d8f",
+      "seed": 1,
+      "input_dim": 20,
+      "feature_dim": 32,
+      "frozen_weights": true,
+      "requires_grad_parameters": 0,
+      "feature_memoization": false,
+      "observations": 667,
+      "train_calls": 47,
+      "backends": [
+        "hybrid_native_frozen_fused",
+        "native_frozen_fused"
+      ],
+      "preparation": [
+        {
+          "backend": "specialized_frozen_prepare",
+          "prepare_ms": 69.508225,
+          "compilation": {
+            "native_frozen_fused": {
+              "compiler": "/home/ubuntu/anaconda3/envs/ns3env/bin/x86_64-conda-linux-gnu-c++",
+              "compile_flags": [
+                "-O3",
+                "-march=native",
+                "-ffp-contract=off",
+                "-fPIC",
+                "-shared",
+                "-std=c++17"
+              ],
+              "source_sha256": "741a0e71bee34858cbfcb275e62256fa5f63b21141d894fa1ee521c53e2111dd",
+              "binary": "/tmp/ns3_frozen_qnn_cache/9bff95103aa6623b/frozen_qnn.so",
+              "binary_sha256": "00121f1ff030ed3f16d21337703177a7dd20c417f89ea4b62d72c3ba3a1d99c7",
+              "blas_library": "/home/ubuntu/anaconda3/envs/ns3env/lib/libcblas.so",
+              "compiled_at_initialization": true,
+              "candidate_feature_memoization": false,
+              "fast_math": false
+            },
+            "hybrid_native_frozen_fused": {
+              "compiler": "/home/ubuntu/anaconda3/envs/ns3env/bin/x86_64-conda-linux-gnu-c++",
+              "compile_flags": [
+                "-O3",
+                "-march=native",
+                "-ffp-contract=off",
+                "-fPIC",
+                "-shared",
+                "-std=c++17"
+              ],
+              "source_sha256": "741a0e71bee34858cbfcb275e62256fa5f63b21141d894fa1ee521c53e2111dd",
+              "binary": "/tmp/ns3_frozen_qnn_cache/9bff95103aa6623b/frozen_qnn.so",
+              "binary_sha256": "00121f1ff030ed3f16d21337703177a7dd20c417f89ea4b62d72c3ba3a1d99c7",
+              "blas_library": "/home/ubuntu/anaconda3/envs/ns3env/lib/libcblas.so",
+              "compiled_at_initialization": true,
+              "candidate_feature_memoization": false,
+              "fast_math": false
+            }
+          }
+        }
+      ],
+      "validation": [
+        {
+          "backend": "native_frozen_fused",
+          "batch": 1,
+          "max_abs_feature_error": 6.556510925292969e-07,
+          "max_abs_prediction_error": 2.6164792776839363e-08,
+          "posterior_mean_argmax_matches": true
+        },
+        {
+          "backend": "hybrid_native_frozen_fused",
+          "batch": 512,
+          "max_abs_feature_error": 2.9578804969787598e-06,
+          "max_abs_prediction_error": 1.0060941760814401e-06,
+          "posterior_mean_argmax_matches": true
+        }
+      ],
+      "timing_input_sha256": {
+        "1": [
+          "fcebb7de5a1437a5a78428be779b7cc53b7ed390e7de83eb0b59456de2d43cef",
+          "0fc665b0b0c479b1099fdce9fea80ce6d7c348ae80b490db6adb3a541074147c",
+          "9854f60044d77edc647b0a47098b4559af2a5ed5dfed1492d660a8f3202d7271",
+          "1532d604d032f486d0d7ace73ca8ae7e577c71be50d790a8a20365d8da5d1031",
+          "171b842cdb37215657e11883c54b135c05ef466ff6668af331f5f7056d6028b8",
+          "7e78479621cca93393841d96e2e3baa96a7e46cb2b3009a6c98ac6aaa0fc0c2e",
+          "b3fbcfaa9122087714ce77afadaf85fcf5acb4daf06bdc887cb1b12a49dbeb98",
+          "1a75f3fba5b1afdedd0002d4ebbadc74d7606d22b71b9a0db1c2d4fb653e0ebe",
+          "7c9bb43b11a863be481548e53fbd76608729eede60b4762bb802f23b569be730",
+          "96f309e9580e579e7dc3bb9f45aaac640108eda133b21f9e0ff3ec2a045f244d",
+          "1bf203b0126a5c0f177faaa2a90c714d3c88bec8aec8204ed1079f341c9e657f",
+          "0664b662ece9bd9da890b98bb9151d53e072217dc96398fde423f8fedecad6b1",
+          "98f3a331461e1b4acd312362ec350a99004fb43ae2f61ef3c2dbaa0604fdc262",
+          "4b2699ba9e19b40bf6fe4db948cdeb13029415723e2e53a74381ae24df7b0301",
+          "ebc51a359116517c6683f0bb25028742503c79a89fb17442e58f6126ccc23105",
+          "a65c42ad2596e3700960b49aae785179f691d4aef337df8446963b245d45978b"
+        ],
+        "512": [
+          "529558c5a71a66c2111fcac9b29443245ea3484500fa3cf11fa8feb563766705",
+          "464afc40e709648ee77f605ca74e03e142800f8955e3397cef1d195966a0bdf9",
+          "7cafbbba94656cc5cddd1408f6a354d6d32b62e1521083b887aed06aaf5f5328",
+          "7c174e40c692b12bfa1beddf8cd8655c20ac83eb47488d42cdc85a1118cf988e",
+          "fd994e5df5d98a7597ef6e897506fb92bcf768b1fa863c9c34283ba52ca82175",
+          "96876ee3a9b235dd3fda999d986c4b5e158fb1d8ce9c42e3c4d8e091b4136b1a",
+          "89eee7c3c2e3462dd25ec6f9378424c933617b55d05558aa5962e5f6933ff689",
+          "e5d6ed95fd90ba2ac5dd4cf7f79fc8b781025a493c95ca1841394972a52fab43",
+          "f22ded0f88093853ebc1d2d8e817ecdbb01cf9d2a04de904c9a14584229a3917",
+          "b03553f8d2baab937bc61b160046d3453634b9fbfe551a95e7424a01080d4b9c",
+          "e717c5be39d4ad88ae8233643b1f7460647b210586df131d3e44ba203952cc80",
+          "0671d94e33bfcc3d80be01846591244f4f430e52b22a7042c06f8cf982e7b3ae",
+          "e922bb59a0d98107ccad469ab4778987574008c67342b82a0c9c5e63515db8c6",
+          "104386f7f31f9783e2b4e97e94c8d0e59eff225053db0daac8703150fb24cb8b",
+          "78feabce74e3e7d2048bec76f4d46f35bb2be298a7783f75527853e5f971a987",
+          "62bf259490bdcbba669aa2f0a384048392c1ec3c6de06e05df182130b250347f"
+        ]
+      },
+      "original_checkpoint": "neural_bandit_bridge/runs/20260919_arpfix_pilot_qnn_hcm_CH20_s1_5/shards/seed_001/checkpoints/qnn_seed000001_final_n0667.pt",
+      "method_id": "qnn_hcm",
+      "selected_backend_by_batch": {
+        "1": "native_frozen_fused",
+        "512": "hybrid_native_frozen_fused"
+      }
+    },
+    {
+      "topology": "MER_FLOORS_BAD_DIM",
+      "display_topology": "ENT-Dispersed",
+      "method": "Neural Bandit (GM)",
+      "checkpoint": "results/inference/checkpoints/MER_FLOORS_BAD_DIM/neural_gm_seed001.pt",
+      "checkpoint_sha256": "3c4b2f3af150c6e05a43de417f27c29670b92d3e850219902952f1310c716251",
+      "model_state_sha256": "646e0346306219ee1ad0e36ecd11c98cdd046f68844f69c6f91fc663b42e176e",
+      "seed": 1,
+      "input_dim": 20,
+      "feature_dim": 32,
+      "frozen_weights": true,
+      "requires_grad_parameters": 0,
+      "feature_memoization": false,
+      "observations": 652,
+      "train_calls": 46,
+      "backends": [
+        "numpy_frozen_mlp"
+      ],
+      "preparation": [],
+      "validation": [
+        {
+          "backend": "numpy_frozen_mlp",
+          "batch": 1,
+          "max_abs_feature_error": 1.1920928955078125e-07,
+          "max_abs_prediction_error": 5.118946433402272e-09,
+          "posterior_mean_argmax_matches": true
+        },
+        {
+          "backend": "numpy_frozen_mlp",
+          "batch": 512,
+          "max_abs_feature_error": 7.152557373046875e-07,
+          "max_abs_prediction_error": 1.2671896315596953e-07,
+          "posterior_mean_argmax_matches": true
+        }
+      ],
+      "timing_input_sha256": {
+        "1": [
+          "fcebb7de5a1437a5a78428be779b7cc53b7ed390e7de83eb0b59456de2d43cef",
+          "0fc665b0b0c479b1099fdce9fea80ce6d7c348ae80b490db6adb3a541074147c",
+          "9854f60044d77edc647b0a47098b4559af2a5ed5dfed1492d660a8f3202d7271",
+          "1532d604d032f486d0d7ace73ca8ae7e577c71be50d790a8a20365d8da5d1031",
+          "171b842cdb37215657e11883c54b135c05ef466ff6668af331f5f7056d6028b8",
+          "7e78479621cca93393841d96e2e3baa96a7e46cb2b3009a6c98ac6aaa0fc0c2e",
+          "b3fbcfaa9122087714ce77afadaf85fcf5acb4daf06bdc887cb1b12a49dbeb98",
+          "1a75f3fba5b1afdedd0002d4ebbadc74d7606d22b71b9a0db1c2d4fb653e0ebe",
+          "7c9bb43b11a863be481548e53fbd76608729eede60b4762bb802f23b569be730",
+          "96f309e9580e579e7dc3bb9f45aaac640108eda133b21f9e0ff3ec2a045f244d",
+          "1bf203b0126a5c0f177faaa2a90c714d3c88bec8aec8204ed1079f341c9e657f",
+          "0664b662ece9bd9da890b98bb9151d53e072217dc96398fde423f8fedecad6b1",
+          "98f3a331461e1b4acd312362ec350a99004fb43ae2f61ef3c2dbaa0604fdc262",
+          "4b2699ba9e19b40bf6fe4db948cdeb13029415723e2e53a74381ae24df7b0301",
+          "ebc51a359116517c6683f0bb25028742503c79a89fb17442e58f6126ccc23105",
+          "a65c42ad2596e3700960b49aae785179f691d4aef337df8446963b245d45978b"
+        ],
+        "512": [
+          "529558c5a71a66c2111fcac9b29443245ea3484500fa3cf11fa8feb563766705",
+          "464afc40e709648ee77f605ca74e03e142800f8955e3397cef1d195966a0bdf9",
+          "7cafbbba94656cc5cddd1408f6a354d6d32b62e1521083b887aed06aaf5f5328",
+          "7c174e40c692b12bfa1beddf8cd8655c20ac83eb47488d42cdc85a1118cf988e",
+          "fd994e5df5d98a7597ef6e897506fb92bcf768b1fa863c9c34283ba52ca82175",
+          "96876ee3a9b235dd3fda999d986c4b5e158fb1d8ce9c42e3c4d8e091b4136b1a",
+          "89eee7c3c2e3462dd25ec6f9378424c933617b55d05558aa5962e5f6933ff689",
+          "e5d6ed95fd90ba2ac5dd4cf7f79fc8b781025a493c95ca1841394972a52fab43",
+          "f22ded0f88093853ebc1d2d8e817ecdbb01cf9d2a04de904c9a14584229a3917",
+          "b03553f8d2baab937bc61b160046d3453634b9fbfe551a95e7424a01080d4b9c",
+          "e717c5be39d4ad88ae8233643b1f7460647b210586df131d3e44ba203952cc80",
+          "0671d94e33bfcc3d80be01846591244f4f430e52b22a7042c06f8cf982e7b3ae",
+          "e922bb59a0d98107ccad469ab4778987574008c67342b82a0c9c5e63515db8c6",
+          "104386f7f31f9783e2b4e97e94c8d0e59eff225053db0daac8703150fb24cb8b",
+          "78feabce74e3e7d2048bec76f4d46f35bb2be298a7783f75527853e5f971a987",
+          "62bf259490bdcbba669aa2f0a384048392c1ec3c6de06e05df182130b250347f"
+        ]
+      },
+      "original_checkpoint": "neural_bandit_bridge/runs/20260923_gm_readout25_mlp_norm_BAD/shards/seed_001/checkpoints/mlp_norm_seed000001_final_n0652.pt",
+      "method_id": "neural_gm",
+      "selected_backend_by_batch": {
+        "1": "numpy_frozen_mlp",
+        "512": "numpy_frozen_mlp"
+      }
+    },
+    {
+      "topology": "MER_FLOORS_BAD_DIM",
+      "display_topology": "ENT-Dispersed",
+      "method": "QNN Bandit (GM)",
+      "checkpoint": "results/inference/checkpoints/MER_FLOORS_BAD_DIM/qnn_gm_seed001.pt",
+      "checkpoint_sha256": "fdb5158cb17cce0b0c99f0dc6aa92f0fae2f5f61ee8ed5772a4b61dc64e5c2ff",
+      "model_state_sha256": "228bd769e52b852993f19208f594b876a95bde37e9cb0fdf6fde5e57b06413df",
+      "seed": 1,
+      "input_dim": 20,
+      "feature_dim": 32,
+      "frozen_weights": true,
+      "requires_grad_parameters": 0,
+      "feature_memoization": false,
+      "observations": 652,
+      "train_calls": 46,
+      "backends": [
+        "hybrid_native_frozen_fused",
+        "native_frozen_fused"
+      ],
+      "preparation": [
+        {
+          "backend": "specialized_frozen_prepare",
+          "prepare_ms": 70.90015,
+          "compilation": {
+            "native_frozen_fused": {
+              "compiler": "/home/ubuntu/anaconda3/envs/ns3env/bin/x86_64-conda-linux-gnu-c++",
+              "compile_flags": [
+                "-O3",
+                "-march=native",
+                "-ffp-contract=off",
+                "-fPIC",
+                "-shared",
+                "-std=c++17"
+              ],
+              "source_sha256": "741a0e71bee34858cbfcb275e62256fa5f63b21141d894fa1ee521c53e2111dd",
+              "binary": "/tmp/ns3_frozen_qnn_cache/9bff95103aa6623b/frozen_qnn.so",
+              "binary_sha256": "00121f1ff030ed3f16d21337703177a7dd20c417f89ea4b62d72c3ba3a1d99c7",
+              "blas_library": "/home/ubuntu/anaconda3/envs/ns3env/lib/libcblas.so",
+              "compiled_at_initialization": true,
+              "candidate_feature_memoization": false,
+              "fast_math": false
+            },
+            "hybrid_native_frozen_fused": {
+              "compiler": "/home/ubuntu/anaconda3/envs/ns3env/bin/x86_64-conda-linux-gnu-c++",
+              "compile_flags": [
+                "-O3",
+                "-march=native",
+                "-ffp-contract=off",
+                "-fPIC",
+                "-shared",
+                "-std=c++17"
+              ],
+              "source_sha256": "741a0e71bee34858cbfcb275e62256fa5f63b21141d894fa1ee521c53e2111dd",
+              "binary": "/tmp/ns3_frozen_qnn_cache/9bff95103aa6623b/frozen_qnn.so",
+              "binary_sha256": "00121f1ff030ed3f16d21337703177a7dd20c417f89ea4b62d72c3ba3a1d99c7",
+              "blas_library": "/home/ubuntu/anaconda3/envs/ns3env/lib/libcblas.so",
+              "compiled_at_initialization": true,
+              "candidate_feature_memoization": false,
+              "fast_math": false
+            }
+          }
+        }
+      ],
+      "validation": [
+        {
+          "backend": "native_frozen_fused",
+          "batch": 1,
+          "max_abs_feature_error": 9.5367431640625e-07,
+          "max_abs_prediction_error": 1.6438974725918598e-07,
+          "posterior_mean_argmax_matches": true
+        },
+        {
+          "backend": "hybrid_native_frozen_fused",
+          "batch": 512,
+          "max_abs_feature_error": 1.7881393432617188e-06,
+          "max_abs_prediction_error": 6.246358237038674e-07,
+          "posterior_mean_argmax_matches": true
+        }
+      ],
+      "timing_input_sha256": {
+        "1": [
+          "fcebb7de5a1437a5a78428be779b7cc53b7ed390e7de83eb0b59456de2d43cef",
+          "0fc665b0b0c479b1099fdce9fea80ce6d7c348ae80b490db6adb3a541074147c",
+          "9854f60044d77edc647b0a47098b4559af2a5ed5dfed1492d660a8f3202d7271",
+          "1532d604d032f486d0d7ace73ca8ae7e577c71be50d790a8a20365d8da5d1031",
+          "171b842cdb37215657e11883c54b135c05ef466ff6668af331f5f7056d6028b8",
+          "7e78479621cca93393841d96e2e3baa96a7e46cb2b3009a6c98ac6aaa0fc0c2e",
+          "b3fbcfaa9122087714ce77afadaf85fcf5acb4daf06bdc887cb1b12a49dbeb98",
+          "1a75f3fba5b1afdedd0002d4ebbadc74d7606d22b71b9a0db1c2d4fb653e0ebe",
+          "7c9bb43b11a863be481548e53fbd76608729eede60b4762bb802f23b569be730",
+          "96f309e9580e579e7dc3bb9f45aaac640108eda133b21f9e0ff3ec2a045f244d",
+          "1bf203b0126a5c0f177faaa2a90c714d3c88bec8aec8204ed1079f341c9e657f",
+          "0664b662ece9bd9da890b98bb9151d53e072217dc96398fde423f8fedecad6b1",
+          "98f3a331461e1b4acd312362ec350a99004fb43ae2f61ef3c2dbaa0604fdc262",
+          "4b2699ba9e19b40bf6fe4db948cdeb13029415723e2e53a74381ae24df7b0301",
+          "ebc51a359116517c6683f0bb25028742503c79a89fb17442e58f6126ccc23105",
+          "a65c42ad2596e3700960b49aae785179f691d4aef337df8446963b245d45978b"
+        ],
+        "512": [
+          "529558c5a71a66c2111fcac9b29443245ea3484500fa3cf11fa8feb563766705",
+          "464afc40e709648ee77f605ca74e03e142800f8955e3397cef1d195966a0bdf9",
+          "7cafbbba94656cc5cddd1408f6a354d6d32b62e1521083b887aed06aaf5f5328",
+          "7c174e40c692b12bfa1beddf8cd8655c20ac83eb47488d42cdc85a1118cf988e",
+          "fd994e5df5d98a7597ef6e897506fb92bcf768b1fa863c9c34283ba52ca82175",
+          "96876ee3a9b235dd3fda999d986c4b5e158fb1d8ce9c42e3c4d8e091b4136b1a",
+          "89eee7c3c2e3462dd25ec6f9378424c933617b55d05558aa5962e5f6933ff689",
+          "e5d6ed95fd90ba2ac5dd4cf7f79fc8b781025a493c95ca1841394972a52fab43",
+          "f22ded0f88093853ebc1d2d8e817ecdbb01cf9d2a04de904c9a14584229a3917",
+          "b03553f8d2baab937bc61b160046d3453634b9fbfe551a95e7424a01080d4b9c",
+          "e717c5be39d4ad88ae8233643b1f7460647b210586df131d3e44ba203952cc80",
+          "0671d94e33bfcc3d80be01846591244f4f430e52b22a7042c06f8cf982e7b3ae",
+          "e922bb59a0d98107ccad469ab4778987574008c67342b82a0c9c5e63515db8c6",
+          "104386f7f31f9783e2b4e97e94c8d0e59eff225053db0daac8703150fb24cb8b",
+          "78feabce74e3e7d2048bec76f4d46f35bb2be298a7783f75527853e5f971a987",
+          "62bf259490bdcbba669aa2f0a384048392c1ec3c6de06e05df182130b250347f"
+        ]
+      },
+      "original_checkpoint": "neural_bandit_bridge/runs/20260921_arpfix2000_qnn_hgmt_BAD/shards/seed_001/checkpoints/qnn_seed000001_final_n0652.pt",
+      "method_id": "qnn_gm",
+      "selected_backend_by_batch": {
+        "1": "native_frozen_fused",
+        "512": "hybrid_native_frozen_fused"
+      }
+    },
+    {
+      "topology": "MER_FLOORS_BAD_DIM",
+      "display_topology": "ENT-Dispersed",
+      "method": "Neural Bandit (HCM)",
+      "checkpoint": "results/inference/checkpoints/MER_FLOORS_BAD_DIM/neural_hcm_seed001.pt",
+      "checkpoint_sha256": "922fefe5df24fdf895c2b8b1a7c17848c43b49eaa09a2a6c5fb25519f55bbfbf",
+      "model_state_sha256": "de8367fe95db836b43e0dbc7a40f33fc910350a5c0f638ab7681faf6aa378180",
+      "seed": 1,
+      "input_dim": 20,
+      "feature_dim": 32,
+      "frozen_weights": true,
+      "requires_grad_parameters": 0,
+      "feature_memoization": false,
+      "observations": 667,
+      "train_calls": 47,
+      "backends": [
+        "numpy_frozen_mlp"
+      ],
+      "preparation": [],
+      "validation": [
+        {
+          "backend": "numpy_frozen_mlp",
+          "batch": 1,
+          "max_abs_feature_error": 4.76837158203125e-07,
+          "max_abs_prediction_error": 7.574388277697963e-08,
+          "posterior_mean_argmax_matches": true
+        },
+        {
+          "backend": "numpy_frozen_mlp",
+          "batch": 512,
+          "max_abs_feature_error": 9.5367431640625e-07,
+          "max_abs_prediction_error": 9.857883820352242e-08,
+          "posterior_mean_argmax_matches": true
+        }
+      ],
+      "timing_input_sha256": {
+        "1": [
+          "fcebb7de5a1437a5a78428be779b7cc53b7ed390e7de83eb0b59456de2d43cef",
+          "0fc665b0b0c479b1099fdce9fea80ce6d7c348ae80b490db6adb3a541074147c",
+          "9854f60044d77edc647b0a47098b4559af2a5ed5dfed1492d660a8f3202d7271",
+          "1532d604d032f486d0d7ace73ca8ae7e577c71be50d790a8a20365d8da5d1031",
+          "171b842cdb37215657e11883c54b135c05ef466ff6668af331f5f7056d6028b8",
+          "7e78479621cca93393841d96e2e3baa96a7e46cb2b3009a6c98ac6aaa0fc0c2e",
+          "b3fbcfaa9122087714ce77afadaf85fcf5acb4daf06bdc887cb1b12a49dbeb98",
+          "1a75f3fba5b1afdedd0002d4ebbadc74d7606d22b71b9a0db1c2d4fb653e0ebe",
+          "7c9bb43b11a863be481548e53fbd76608729eede60b4762bb802f23b569be730",
+          "96f309e9580e579e7dc3bb9f45aaac640108eda133b21f9e0ff3ec2a045f244d",
+          "1bf203b0126a5c0f177faaa2a90c714d3c88bec8aec8204ed1079f341c9e657f",
+          "0664b662ece9bd9da890b98bb9151d53e072217dc96398fde423f8fedecad6b1",
+          "98f3a331461e1b4acd312362ec350a99004fb43ae2f61ef3c2dbaa0604fdc262",
+          "4b2699ba9e19b40bf6fe4db948cdeb13029415723e2e53a74381ae24df7b0301",
+          "ebc51a359116517c6683f0bb25028742503c79a89fb17442e58f6126ccc23105",
+          "a65c42ad2596e3700960b49aae785179f691d4aef337df8446963b245d45978b"
+        ],
+        "512": [
+          "529558c5a71a66c2111fcac9b29443245ea3484500fa3cf11fa8feb563766705",
+          "464afc40e709648ee77f605ca74e03e142800f8955e3397cef1d195966a0bdf9",
+          "7cafbbba94656cc5cddd1408f6a354d6d32b62e1521083b887aed06aaf5f5328",
+          "7c174e40c692b12bfa1beddf8cd8655c20ac83eb47488d42cdc85a1118cf988e",
+          "fd994e5df5d98a7597ef6e897506fb92bcf768b1fa863c9c34283ba52ca82175",
+          "96876ee3a9b235dd3fda999d986c4b5e158fb1d8ce9c42e3c4d8e091b4136b1a",
+          "89eee7c3c2e3462dd25ec6f9378424c933617b55d05558aa5962e5f6933ff689",
+          "e5d6ed95fd90ba2ac5dd4cf7f79fc8b781025a493c95ca1841394972a52fab43",
+          "f22ded0f88093853ebc1d2d8e817ecdbb01cf9d2a04de904c9a14584229a3917",
+          "b03553f8d2baab937bc61b160046d3453634b9fbfe551a95e7424a01080d4b9c",
+          "e717c5be39d4ad88ae8233643b1f7460647b210586df131d3e44ba203952cc80",
+          "0671d94e33bfcc3d80be01846591244f4f430e52b22a7042c06f8cf982e7b3ae",
+          "e922bb59a0d98107ccad469ab4778987574008c67342b82a0c9c5e63515db8c6",
+          "104386f7f31f9783e2b4e97e94c8d0e59eff225053db0daac8703150fb24cb8b",
+          "78feabce74e3e7d2048bec76f4d46f35bb2be298a7783f75527853e5f971a987",
+          "62bf259490bdcbba669aa2f0a384048392c1ec3c6de06e05df182130b250347f"
+        ]
+      },
+      "original_checkpoint": "neural_bandit_bridge/runs/20261001_neural_hcm_mlp_norm_eps01_BAD/shards/seed_001/checkpoints/mlp_norm_seed000001_final_n0667.pt",
+      "method_id": "neural_hcm",
+      "selected_backend_by_batch": {
+        "1": "numpy_frozen_mlp",
+        "512": "numpy_frozen_mlp"
+      }
+    },
+    {
+      "topology": "MER_FLOORS_BAD_DIM",
+      "display_topology": "ENT-Dispersed",
+      "method": "QNN Bandit (HCM)",
+      "checkpoint": "results/inference/checkpoints/MER_FLOORS_BAD_DIM/qnn_hcm_seed001.pt",
+      "checkpoint_sha256": "5837cf37d953a482cb0f55fbb47389ea32790ca83bd48aaca92e4b466855900e",
+      "model_state_sha256": "bcf0ab9b503f36b57d3bdcd0978603a2760331def3c5e7e61ac87782a82394c0",
+      "seed": 1,
+      "input_dim": 20,
+      "feature_dim": 32,
+      "frozen_weights": true,
+      "requires_grad_parameters": 0,
+      "feature_memoization": false,
+      "observations": 667,
+      "train_calls": 47,
+      "backends": [
+        "hybrid_native_frozen_fused",
+        "native_frozen_fused"
+      ],
+      "preparation": [
+        {
+          "backend": "specialized_frozen_prepare",
+          "prepare_ms": 70.328079,
+          "compilation": {
+            "native_frozen_fused": {
+              "compiler": "/home/ubuntu/anaconda3/envs/ns3env/bin/x86_64-conda-linux-gnu-c++",
+              "compile_flags": [
+                "-O3",
+                "-march=native",
+                "-ffp-contract=off",
+                "-fPIC",
+                "-shared",
+                "-std=c++17"
+              ],
+              "source_sha256": "741a0e71bee34858cbfcb275e62256fa5f63b21141d894fa1ee521c53e2111dd",
+              "binary": "/tmp/ns3_frozen_qnn_cache/9bff95103aa6623b/frozen_qnn.so",
+              "binary_sha256": "00121f1ff030ed3f16d21337703177a7dd20c417f89ea4b62d72c3ba3a1d99c7",
+              "blas_library": "/home/ubuntu/anaconda3/envs/ns3env/lib/libcblas.so",
+              "compiled_at_initialization": true,
+              "candidate_feature_memoization": false,
+              "fast_math": false
+            },
+            "hybrid_native_frozen_fused": {
+              "compiler": "/home/ubuntu/anaconda3/envs/ns3env/bin/x86_64-conda-linux-gnu-c++",
+              "compile_flags": [
+                "-O3",
+                "-march=native",
+                "-ffp-contract=off",
+                "-fPIC",
+                "-shared",
+                "-std=c++17"
+              ],
+              "source_sha256": "741a0e71bee34858cbfcb275e62256fa5f63b21141d894fa1ee521c53e2111dd",
+              "binary": "/tmp/ns3_frozen_qnn_cache/9bff95103aa6623b/frozen_qnn.so",
+              "binary_sha256": "00121f1ff030ed3f16d21337703177a7dd20c417f89ea4b62d72c3ba3a1d99c7",
+              "blas_library": "/home/ubuntu/anaconda3/envs/ns3env/lib/libcblas.so",
+              "compiled_at_initialization": true,
+              "candidate_feature_memoization": false,
+              "fast_math": false
+            }
+          }
+        }
+      ],
+      "validation": [
+        {
+          "backend": "native_frozen_fused",
+          "batch": 1,
+          "max_abs_feature_error": 3.0994415283203125e-06,
+          "max_abs_prediction_error": 5.540535086279164e-07,
+          "posterior_mean_argmax_matches": true
+        },
+        {
+          "backend": "hybrid_native_frozen_fused",
+          "batch": 512,
+          "max_abs_feature_error": 4.887580871582031e-06,
+          "max_abs_prediction_error": 1.3570187475941964e-06,
+          "posterior_mean_argmax_matches": true
+        }
+      ],
+      "timing_input_sha256": {
+        "1": [
+          "fcebb7de5a1437a5a78428be779b7cc53b7ed390e7de83eb0b59456de2d43cef",
+          "0fc665b0b0c479b1099fdce9fea80ce6d7c348ae80b490db6adb3a541074147c",
+          "9854f60044d77edc647b0a47098b4559af2a5ed5dfed1492d660a8f3202d7271",
+          "1532d604d032f486d0d7ace73ca8ae7e577c71be50d790a8a20365d8da5d1031",
+          "171b842cdb37215657e11883c54b135c05ef466ff6668af331f5f7056d6028b8",
+          "7e78479621cca93393841d96e2e3baa96a7e46cb2b3009a6c98ac6aaa0fc0c2e",
+          "b3fbcfaa9122087714ce77afadaf85fcf5acb4daf06bdc887cb1b12a49dbeb98",
+          "1a75f3fba5b1afdedd0002d4ebbadc74d7606d22b71b9a0db1c2d4fb653e0ebe",
+          "7c9bb43b11a863be481548e53fbd76608729eede60b4762bb802f23b569be730",
+          "96f309e9580e579e7dc3bb9f45aaac640108eda133b21f9e0ff3ec2a045f244d",
+          "1bf203b0126a5c0f177faaa2a90c714d3c88bec8aec8204ed1079f341c9e657f",
+          "0664b662ece9bd9da890b98bb9151d53e072217dc96398fde423f8fedecad6b1",
+          "98f3a331461e1b4acd312362ec350a99004fb43ae2f61ef3c2dbaa0604fdc262",
+          "4b2699ba9e19b40bf6fe4db948cdeb13029415723e2e53a74381ae24df7b0301",
+          "ebc51a359116517c6683f0bb25028742503c79a89fb17442e58f6126ccc23105",
+          "a65c42ad2596e3700960b49aae785179f691d4aef337df8446963b245d45978b"
+        ],
+        "512": [
+          "529558c5a71a66c2111fcac9b29443245ea3484500fa3cf11fa8feb563766705",
+          "464afc40e709648ee77f605ca74e03e142800f8955e3397cef1d195966a0bdf9",
+          "7cafbbba94656cc5cddd1408f6a354d6d32b62e1521083b887aed06aaf5f5328",
+          "7c174e40c692b12bfa1beddf8cd8655c20ac83eb47488d42cdc85a1118cf988e",
+          "fd994e5df5d98a7597ef6e897506fb92bcf768b1fa863c9c34283ba52ca82175",
+          "96876ee3a9b235dd3fda999d986c4b5e158fb1d8ce9c42e3c4d8e091b4136b1a",
+          "89eee7c3c2e3462dd25ec6f9378424c933617b55d05558aa5962e5f6933ff689",
+          "e5d6ed95fd90ba2ac5dd4cf7f79fc8b781025a493c95ca1841394972a52fab43",
+          "f22ded0f88093853ebc1d2d8e817ecdbb01cf9d2a04de904c9a14584229a3917",
+          "b03553f8d2baab937bc61b160046d3453634b9fbfe551a95e7424a01080d4b9c",
+          "e717c5be39d4ad88ae8233643b1f7460647b210586df131d3e44ba203952cc80",
+          "0671d94e33bfcc3d80be01846591244f4f430e52b22a7042c06f8cf982e7b3ae",
+          "e922bb59a0d98107ccad469ab4778987574008c67342b82a0c9c5e63515db8c6",
+          "104386f7f31f9783e2b4e97e94c8d0e59eff225053db0daac8703150fb24cb8b",
+          "78feabce74e3e7d2048bec76f4d46f35bb2be298a7783f75527853e5f971a987",
+          "62bf259490bdcbba669aa2f0a384048392c1ec3c6de06e05df182130b250347f"
+        ]
+      },
+      "original_checkpoint": "neural_bandit_bridge/runs/20260921_arpfix2000_qnn_hcm_BAD/shards/seed_001/checkpoints/qnn_seed000001_final_n0667.pt",
+      "method_id": "qnn_hcm",
+      "selected_backend_by_batch": {
+        "1": "native_frozen_fused",
+        "512": "hybrid_native_frozen_fused"
+      }
+    }
+  ],
+  "blas_runtime": {
+    "queried_runtimes": [
+      {
+        "library": "/home/ubuntu/anaconda3/envs/ns3env/lib/libcblas.so",
+        "symbol": "openblas_get_num_threads",
+        "num_threads": 1
+      },
+      {
+        "library": "/home/ubuntu/anaconda3/envs/ns3env/lib/python3.10/site-packages/torch/lib/libtorch_cpu.so",
+        "symbol": "MKL_Get_Max_Threads",
+        "num_threads": 1
+      }
+    ],
+    "thread_environment": {
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    }
+  },
+  "after": {
+    "utc": "2026-10-02T06:26:13.178543+00:00",
+    "cpu_model": "AMD Ryzen 9 9950X3D2 16-Core Processor",
+    "hostname": "ubuntu",
+    "kernel": "7.0.0-34-generic",
+    "affinity": [
+      31
+    ],
+    "loadavg": [
+      1.8486328125,
+      1.4765625,
+      1.396484375
+    ],
+    "python": "3.10.20",
+    "numpy": "2.2.6",
+    "torch": "2.12.1+cpu",
+    "torch_threads": 1,
+    "torch_interop_threads": 1
+  },
+  "raw_samples": 48000,
+  "summary_groups": 228,
+  "checkpoint_and_model_state_unchanged": true,
+  "included_timing_groups": 48,
+  "source_protocol_sha256": "f3bbc9fcfe366e3c8e9f41642691f3ef2b93e15a306d114e25ac83b31e7d12f4",
+  "selected_backends": {
+    "Neural Bandit": "NumPy fixed-weight three-layer MLP",
+    "QNN Bandit, batch1": "C++ fused fixed quantum gates and readout",
+    "QNN Bandit, batch512": "NumPy affine transforms + C++ fused quantum evolution"
+  }
+}

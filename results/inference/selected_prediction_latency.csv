@@ -1,0 +1,25 @@
+topology,display_topology,method,extractor_family,batch,backend,scope,calls,mean_ms,median_ms,p95_ms,minimum_ms,maximum_ms
+C6o,C6,Neural Bandit (GM),Full-width MLP,1,numpy_frozen_mlp,fresh_forward_posterior_prediction,1000,0.008758955,0.008676,0.009208449999999998,0.008506,0.018044
+C6o,C6,Neural Bandit (GM),Full-width MLP,512,numpy_frozen_mlp,fresh_forward_posterior_prediction,1000,0.077579742,0.077094,0.0801405,0.076022,0.089608
+C6o,C6,QNN Bandit (GM),QNN,1,native_frozen_fused,fresh_forward_posterior_prediction,1000,0.006290734,0.006042,0.00665345,0.005901,0.033112
+C6o,C6,QNN Bandit (GM),QNN,512,hybrid_native_frozen_fused,fresh_forward_posterior_prediction,1000,0.283376469,0.28030900000000003,0.3028775,0.276527,0.343352
+C6o,C6,Neural Bandit (HCM),Full-width MLP,1,numpy_frozen_mlp,fresh_forward_posterior_prediction,1000,0.008875627,0.008786,0.0093385,0.008616,0.012804
+C6o,C6,Neural Bandit (HCM),Full-width MLP,512,numpy_frozen_mlp,fresh_forward_posterior_prediction,1000,0.081383912,0.079879,0.0913915,0.076594,0.096671
+C6o,C6,QNN Bandit (HCM),QNN,1,native_frozen_fused,fresh_forward_posterior_prediction,1000,0.006206239,0.005891,0.006572499999999999,0.00572,0.055674
+C6o,C6,QNN Bandit (HCM),QNN,512,hybrid_native_frozen_fused,fresh_forward_posterior_prediction,1000,0.279718964,0.278536,0.28333200000000003,0.276678,0.322945
+MER_FLOORS_CH20_S5,ENT-Clustered,Neural Bandit (GM),Full-width MLP,1,numpy_frozen_mlp,fresh_forward_posterior_prediction,1000,0.008955761,0.008977,0.009478499999999999,0.008586,0.022131
+MER_FLOORS_CH20_S5,ENT-Clustered,Neural Bandit (GM),Full-width MLP,512,numpy_frozen_mlp,fresh_forward_posterior_prediction,1000,0.085314262,0.0842675,0.097333,0.078296,0.103444
+MER_FLOORS_CH20_S5,ENT-Clustered,QNN Bandit (GM),QNN,1,native_frozen_fused,fresh_forward_posterior_prediction,1000,0.006321985,0.006082,0.00668345,0.005881,0.035887
+MER_FLOORS_CH20_S5,ENT-Clustered,QNN Bandit (GM),QNN,512,hybrid_native_frozen_fused,fresh_forward_posterior_prediction,1000,0.280150801,0.279082,0.28356454999999997,0.277359,0.319888
+MER_FLOORS_CH20_S5,ENT-Clustered,Neural Bandit (HCM),Full-width MLP,1,numpy_frozen_mlp,fresh_forward_posterior_prediction,1000,0.009000307,0.009037,0.009538,0.008616,0.011882
+MER_FLOORS_CH20_S5,ENT-Clustered,Neural Bandit (HCM),Full-width MLP,512,numpy_frozen_mlp,fresh_forward_posterior_prediction,1000,0.080980317,0.079303,0.0892675,0.077315,0.096881
+MER_FLOORS_CH20_S5,ENT-Clustered,QNN Bandit (HCM),QNN,1,native_frozen_fused,fresh_forward_posterior_prediction,1000,0.00622522,0.005991,0.0066124999999999995,0.005861,0.033994
+MER_FLOORS_CH20_S5,ENT-Clustered,QNN Bandit (HCM),QNN,512,hybrid_native_frozen_fused,fresh_forward_posterior_prediction,1000,0.280313002,0.279543,0.283683,0.277209,0.317855
+MER_FLOORS_BAD_DIM,ENT-Dispersed,Neural Bandit (GM),Full-width MLP,1,numpy_frozen_mlp,fresh_forward_posterior_prediction,1000,0.009058223,0.008937,0.009488,0.008777,0.028834
+MER_FLOORS_BAD_DIM,ENT-Dispersed,Neural Bandit (GM),Full-width MLP,512,numpy_frozen_mlp,fresh_forward_posterior_prediction,1000,0.081422093,0.080491,0.08729355,0.077755,0.119123
+MER_FLOORS_BAD_DIM,ENT-Dispersed,QNN Bandit (GM),QNN,1,native_frozen_fused,fresh_forward_posterior_prediction,1000,0.006129245,0.005901,0.006472,0.00576,0.033703
+MER_FLOORS_BAD_DIM,ENT-Dispersed,QNN Bandit (GM),QNN,512,hybrid_native_frozen_fused,fresh_forward_posterior_prediction,1000,0.288000375,0.284497,0.30663850000000004,0.2781,0.329907
+MER_FLOORS_BAD_DIM,ENT-Dispersed,Neural Bandit (HCM),Full-width MLP,1,numpy_frozen_mlp,fresh_forward_posterior_prediction,1000,0.008798226,0.008716,0.009248499999999998,0.008546,0.013836
+MER_FLOORS_BAD_DIM,ENT-Dispersed,Neural Bandit (HCM),Full-width MLP,512,numpy_frozen_mlp,fresh_forward_posterior_prediction,1000,0.08441574,0.081472,0.0969725,0.078517,0.102592
+MER_FLOORS_BAD_DIM,ENT-Dispersed,QNN Bandit (HCM),QNN,1,native_frozen_fused,fresh_forward_posterior_prediction,1000,0.006156607,0.005901,0.00651345,0.00577,0.032882
+MER_FLOORS_BAD_DIM,ENT-Dispersed,QNN Bandit (HCM),QNN,512,hybrid_native_frozen_fused,fresh_forward_posterior_prediction,1000,0.28056885,0.279433,0.28415245,0.2779,0.318276

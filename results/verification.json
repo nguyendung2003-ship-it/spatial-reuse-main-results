@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "performance": {
+    "input_matrices": 81,
+    "table_v_rows": 27,
+    "per_seed_rows": 675,
+    "paired_contrasts": 9,
+    "imported_figure_files": 24
+  },
+  "inference": {
+    "trained_checkpoints": 12,
+    "selected_timing_groups": 48,
+    "selected_raw_samples": 48000,
+    "native_traces": 4,
+    "native_reporting_windows": 8
+  },
+  "simulations_run": 0
+}

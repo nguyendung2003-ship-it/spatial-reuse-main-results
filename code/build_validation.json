@@ -1,0 +1,127 @@
+{
+  "archive_sha256": "25e07a95349847b3e453d3af29a94545a4f869b1c6b4d860900cb7718fb1a618",
+  "ns3_version": "3.35",
+  "python": "3.10.20 | packaged by conda-forge | (main, Jun 11 2026, 03:31:56) [GCC 14.3.0]",
+  "CC": "/home/ubuntu/anaconda3/envs/ns3env/bin/x86_64-conda-linux-gnu-gcc",
+  "CXX": "/home/ubuntu/anaconda3/envs/ns3env/bin/x86_64-conda-linux-gnu-g++",
+  "CXXFLAGS": "-O3 -g -Wall -std=c++17",
+  "modules": [
+    "core",
+    "network",
+    "mobility",
+    "config-store",
+    "wifi",
+    "internet",
+    "applications"
+  ],
+  "compiled": true,
+  "binary": "work/ns-allinone-3.35/ns-3.35/build/scratch/nsTest/nsTest",
+  "simulation_run": false,
+  "binary_sha256": "fb3f23d3b5b982f98a3542916b923ae2b01a3d3cca8df5d92e16082190474d09",
+  "status": "pass",
+  "fresh_build": true,
+  "patch_checks": [
+    {
+      "source": "src/wifi/model/block-ack-manager.cc",
+      "matches_active_simulator": true,
+      "sha256": "c0a243118fe0d36e70a6715b333d7f0867833da559b47e1c3f33a2151d02b2b4"
+    },
+    {
+      "source": "src/wifi/model/ht/ht-frame-exchange-manager.cc",
+      "matches_active_simulator": true,
+      "sha256": "1f58aaae305f5cc3e12cc8108f105aa54546262f15f2d4a17a64fe496f70f88b"
+    }
+  ],
+  "copied_source_checks": [
+    {
+      "source": "bridge_utils.cc",
+      "matches_build_input": true,
+      "sha256": "b113b93b4acf801aee304a194fe79a4645a52e01830ceb52f170306a327888b8"
+    },
+    {
+      "source": "bridge_utils.hh",
+      "matches_build_input": true,
+      "sha256": "6147fefbc80f76d49c7e3f192d13dfe6060796889c9e89bdf7fb0ba98fd9a7a2"
+    },
+    {
+      "source": "json-forwards.hh",
+      "matches_build_input": true,
+      "sha256": "6ef14a0b875cb9c6eed61f5e0d761ea006c8ff0367b38f207dd13bffbfc5ffb6"
+    },
+    {
+      "source": "json.hh",
+      "matches_build_input": true,
+      "sha256": "a9845ecfd5645136d3dbd59a6b2d900d37795678bb5039aabeec27f377dadd01"
+    },
+    {
+      "source": "jsoncpp.cc",
+      "matches_build_input": true,
+      "sha256": "f22e5197ff75400223f60ddb9870ba3047ba71faf32e07a34591b01c54423922"
+    },
+    {
+      "source": "main.cc",
+      "matches_build_input": true,
+      "sha256": "b6f99e6aed993b0ea912ae81e246ce9774030619756324670a32acddf4e59d51"
+    },
+    {
+      "source": "optimizers.cc",
+      "matches_build_input": true,
+      "sha256": "c19f2a6b8023322b02374dbac9b7ce99c3d9182186f715fe3b847d1b32d2cebc"
+    },
+    {
+      "source": "optimizers.hh",
+      "matches_build_input": true,
+      "sha256": "fc76e626b015169fd0a89915cca4357a7437b507dd500575759cb80a1ed91090"
+    },
+    {
+      "source": "parameters.cc",
+      "matches_build_input": true,
+      "sha256": "23d949a737f952642bf82dd1b4bc0775fe483be042fa29a6c8403863651f416c"
+    },
+    {
+      "source": "parameters.hh",
+      "matches_build_input": true,
+      "sha256": "09a08d44f322762cc058c12d6e38c432ee77af080333d8cbfd1338aed82a1375"
+    },
+    {
+      "source": "runtime_timing.hh",
+      "matches_build_input": true,
+      "sha256": "7aac53849c1289d8aa85c7ea5ccf598e4663dea0a85c004aa044e4d113714015"
+    },
+    {
+      "source": "samplers.cc",
+      "matches_build_input": true,
+      "sha256": "413e95cce38733e0068537a80cfdd4d1734d87bf83cefc9121754ce8528f31b3"
+    },
+    {
+      "source": "samplers.hh",
+      "matches_build_input": true,
+      "sha256": "5c6bd752ad658b68fb2ced7f2d595147459115faf6754a765c729e598efbfe54"
+    },
+    {
+      "source": "simulation.cc",
+      "matches_build_input": true,
+      "sha256": "a94b15ae5b31e1300c732149fa8b596af3382e305ca7adc92aaa75d0cc5ecca8"
+    },
+    {
+      "source": "simulation.hh",
+      "matches_build_input": true,
+      "sha256": "5762f3549841df433b91fa169675998c3d4f7a947cf4b1be4026e3b519400e1f"
+    },
+    {
+      "source": "topos/C6o.json",
+      "matches_build_input": true,
+      "sha256": "10a64f7f45e45e54c618886bcfe87f5d21b9f686c22ba8ee311dd928e5fe7c13"
+    },
+    {
+      "source": "topos/MER_FLOORS_BAD_DIM.json",
+      "matches_build_input": true,
+      "sha256": "d700255fb1ebae96d31b70e73873326b6f5d3325d7c17f257cad22cdda8dd98f"
+    },
+    {
+      "source": "topos/MER_FLOORS_CH20_S5.json",
+      "matches_build_input": true,
+      "sha256": "42e678d5dd7e69b975b88a11a56aed021c1c4132249dd6f6c7ac7d07a874d116"
+    }
+  ]
+}

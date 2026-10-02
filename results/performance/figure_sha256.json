@@ -1,0 +1,98 @@
+[
+  {
+    "path": "results/performance/Figures/C6o/01_reward.pdf",
+    "sha256": "91b2353d562ee6f7ed66972a842d16e9fa873f4dbed88646c1b3ff21f613dc05"
+  },
+  {
+    "path": "results/performance/Figures/C6o/01_reward.png",
+    "sha256": "aeda626b2572b96efdaf1a86638b04760140981951d034995f965e98e3907c9d"
+  },
+  {
+    "path": "results/performance/Figures/C6o/02_cumulative_regret.pdf",
+    "sha256": "ca607240069d19b30c70cf00dd85f94bf06d3f3c1c0872f5394c245280473a39"
+  },
+  {
+    "path": "results/performance/Figures/C6o/02_cumulative_regret.png",
+    "sha256": "a9fef3ada5f47a1768817fc4c67677b71912bfb422b51bf57731feb46d77e1d3"
+  },
+  {
+    "path": "results/performance/Figures/C6o/03_jain_fairness.pdf",
+    "sha256": "629da423dbcf39635a5b356472c6ebb81e74386a92d6f05fd1eb2b0bc4a119ce"
+  },
+  {
+    "path": "results/performance/Figures/C6o/03_jain_fairness.png",
+    "sha256": "1379e71cac831b854ffafa2d5c2ad893f59fb5820e138d6ba239df1bc3ddfe03"
+  },
+  {
+    "path": "results/performance/Figures/C6o/04_aggregate_throughput.pdf",
+    "sha256": "5f662f8cd90e0d62bcb423031f6e703e0412b7232aadf40c980b274cd80c8e3f"
+  },
+  {
+    "path": "results/performance/Figures/C6o/04_aggregate_throughput.png",
+    "sha256": "b40fad310ab327a056d3496dc3abc221e4adc7e1733b958f98130a595fa9f568"
+  },
+  {
+    "path": "results/performance/Figures/MER_FLOORS_BAD_DIM/01_reward.pdf",
+    "sha256": "b7005c9a9f973dbfdba61f614e15b28d871f70cf591914df9bb6674c1517f2c3"
+  },
+  {
+    "path": "results/performance/Figures/MER_FLOORS_BAD_DIM/01_reward.png",
+    "sha256": "93f91bd0f3ce22e5eeac3b014f741e512c88d4f8a2a3df53e94d01e8f7bfa60a"
+  },
+  {
+    "path": "results/performance/Figures/MER_FLOORS_BAD_DIM/02_cumulative_regret.pdf",
+    "sha256": "95a620b0030ddfa4107eca7a27738561db717c94889daf193e43fca77f690ccd"
+  },
+  {
+    "path": "results/performance/Figures/MER_FLOORS_BAD_DIM/02_cumulative_regret.png",
+    "sha256": "5991b73c9df49e0a51467c8c0e96ae6de335974ed233af3cc94e60f3a814c507"
+  },
+  {
+    "path": "results/performance/Figures/MER_FLOORS_BAD_DIM/03_jain_fairness.pdf",
+    "sha256": "098b8af161092c6a880f9c1a5e547c0627df47667e493dc82adf8c53f99ed6b0"
+  },
+  {
+    "path": "results/performance/Figures/MER_FLOORS_BAD_DIM/03_jain_fairness.png",
+    "sha256": "fa4c5bf0a8365c50c4d89f53bdaafd4a960e693585b1fecaa71962ab64bbfdae"
+  },
+  {
+    "path": "results/performance/Figures/MER_FLOORS_BAD_DIM/04_aggregate_throughput.pdf",
+    "sha256": "77b96ef64ddd5d3cb911e5fc1508f7ce0b895a9146c4c67a69d03dbdc8586ed0"
+  },
+  {
+    "path": "results/performance/Figures/MER_FLOORS_BAD_DIM/04_aggregate_throughput.png",
+    "sha256": "94f7dafece700e2ccbee11a7b255b62f06d9f9e425e34a17c56025c7ad252d30"
+  },
+  {
+    "path": "results/performance/Figures/MER_FLOORS_CH20_S5/01_reward.pdf",
+    "sha256": "a354e1734339ab3f5e27533d41cf4b337f3e575a0d2e6e95ce795afd8fdcbb8a"
+  },
+  {
+    "path": "results/performance/Figures/MER_FLOORS_CH20_S5/01_reward.png",
+    "sha256": "d95d7c446305178a13ef491cd9ea6252b7c632120eaa977478031be5d5381229"
+  },
+  {
+    "path": "results/performance/Figures/MER_FLOORS_CH20_S5/02_cumulative_regret.pdf",
+    "sha256": "34a4a46e0273c5c1defbceb1648a55105c6b8f80a2066e8cf5c9518c9a92dad0"
+  },
+  {
+    "path": "results/performance/Figures/MER_FLOORS_CH20_S5/02_cumulative_regret.png",
+    "sha256": "5978a011533f4eaf6ee02582e75b55818ba0e1cbff582905873d946aec0cee87"
+  },
+  {
+    "path": "results/performance/Figures/MER_FLOORS_CH20_S5/03_jain_fairness.pdf",
+    "sha256": "bdf69d894a35c4dd4d5128ee44b4394fe08b4a4eaed330dc2a03f72fa0e376ed"
+  },
+  {
+    "path": "results/performance/Figures/MER_FLOORS_CH20_S5/03_jain_fairness.png",
+    "sha256": "432c09e667dce06525b13a908271d2561c55f3720f699a39868ac5374267d961"
+  },
+  {
+    "path": "results/performance/Figures/MER_FLOORS_CH20_S5/04_aggregate_throughput.pdf",
+    "sha256": "4187a34873acd8a09231a548a8ad8124972ed7a03821381fd5899e7a301d696b"
+  },
+  {
+    "path": "results/performance/Figures/MER_FLOORS_CH20_S5/04_aggregate_throughput.png",
+    "sha256": "5cf3650b84bd7a2a7632666bdead908c18861fa89ade677080272858ec34ee02"
+  }
+]

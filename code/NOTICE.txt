@@ -1,0 +1,26 @@
+Source components
+=================
+
+The ns-3.35 release is bundled in code/vendor/ns-allinone-3.35.tar.bz2 with
+SHA256 25e07a95349847b3e453d3af29a94545a4f869b1c6b4d860900cb7718fb1a618.
+Its GPL version 2 license is reproduced in code/licenses/ns-3-GPL-2.0.txt.
+Individual upstream source files retain their license notices when extracted.
+
+The JsonCpp amalgamated files in code/nsTest retain their public-domain/MIT
+license text at the top of json.hh, json-forwards.hh and jsoncpp.cc.
+
+code/patches/ns3-35-block-ack-stability.patch reproduces the two local ns-3
+Wi-Fi stability fixes present in the simulator used to generate the results.
+No other ns-3 source files differed from the bundled release in the source
+audit. These fixes preserve compressed BlockAck support and remove an invalid
+iterator after an expired MPDU triggers the discard callback.
+
+code/source_manifest.json records each copied file's original source and
+SHA256, its packaged SHA256, and portability or CLI changes. Python core
+modules preserve the numerical implementations used for the published full
+MLP and QNN. The exposed experiment runner is scripts/run_main.py. Dormant
+internal branches in the audited monolithic implementation are not published
+experiments, and cannot be selected through the main runner.
+
+No repository-wide license was supplied for the authors' experiment code.
+This package does not assign a new license or alter authorship rights.

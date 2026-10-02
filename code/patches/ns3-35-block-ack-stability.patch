@@ -1,0 +1,49 @@
+--- a/src/wifi/model/block-ack-manager.cc
++++ b/src/wifi/model/block-ack-manager.cc
+@@ -127,7 +127,11 @@
+   agreement.SetBufferSize (reqHdr->GetBufferSize());
+   agreement.SetTimeout (reqHdr->GetTimeout ());
+   agreement.SetAmsduSupport (reqHdr->IsAmsduSupported ());
+-  agreement.SetHtSupported (htSupported);
++  // Basic Block Ack agreements are not supported by ns-3.  An agreement can
++  // only be negotiated by an HT-or-newer peer, so keep the negotiated BA type
++  // compressed even if capability state changes while the action exchange is
++  // in flight.  This backports upstream ns-3 commit 20fa8675.
++  agreement.SetHtSupported (true);
+   if (reqHdr->IsImmediateBlockAck ())
+     {
+       agreement.SetImmediateBlockAck ();
+@@ -386,8 +390,19 @@
+   if (status == ACKNOWLEDGED)
+     {
+       // the MPDU has to be dequeued from the EDCA queue
+-      m_queue->DequeueIfQueued (*mpduIt);
+-      return it->second.second.erase (mpduIt);
++      //
++      // Remove it from the in-flight list before touching the EDCA queue.
++      // DequeueIfQueued() checks the packet lifetime first; when the packet
++      // has expired, that check emits the queue's Expired trace and
++      // NotifyDiscardedMpdu() removes the same MPDU from this list.  Erasing
++      // mpduIt after that callback used to erase an already-invalid list
++      // iterator (a deterministic ns-3 BlockAckManager crash under heavy
++      // configurations).  Keeping the item alive by Ptr makes the subsequent
++      // queue operation safe while preserving the normal ACK semantics.
++      Ptr<WifiMacQueueItem> acknowledged = *mpduIt;
++      auto nextIt = it->second.second.erase (mpduIt);
++      m_queue->DequeueIfQueued (acknowledged);
++      return nextIt;
+     }
+ 
+   WifiMacHeader& hdr = (*mpduIt)->GetHeader ();
+--- a/src/wifi/model/ht/ht-frame-exchange-manager.cc
++++ b/src/wifi/model/ht/ht-frame-exchange-manager.cc
+@@ -292,8 +292,7 @@
+   RecipientBlockAckAgreement agreement (originator, respHdr->IsAmsduSupported (), tid,
+                                         respHdr->GetBufferSize () + 1, respHdr->GetTimeout (),
+                                         startingSeq,
+-                                        m_mac->GetWifiRemoteStationManager ()->GetHtSupported ()
+-                                        && m_mac->GetWifiRemoteStationManager ()->GetHtSupported (originator));
++                                        true);
+   agreement.SetMacRxMiddle (m_rxMiddle);
+   if (respHdr->IsImmediateBlockAck ())
+     {

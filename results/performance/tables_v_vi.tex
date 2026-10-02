@@ -1,0 +1,40 @@
+\begin{table*}[!t]
+\centering
+\caption{Tail Reward $\bar r$ (Cycles 1901--2000), Final Cumulative Performance Loss $\hat L_{\mathrm{ref}}$ Relative to the Frozen Empirical Reference (Cycle 2000), Jain's Fairness Index $J$, and Aggregate Throughput $S_{\mathrm{agg}}$ (Mbps). Medians over 25 Seeds; Bold Indicates the Best Unrounded Value in Each Column.}
+\label{tab:final}
+\small
+\setlength{\tabcolsep}{4.2pt}
+\begin{tabular}{l|cccc|cccc|cccc}
+\hline
+& \multicolumn{4}{c|}{C6 ($\hat\mu_{\mathrm{ref}}=0.926$)} & \multicolumn{4}{c|}{ENT-Clustered ($\hat\mu_{\mathrm{ref}}=0.952$)} & \multicolumn{4}{c}{ENT-Dispersed ($\hat\mu_{\mathrm{ref}}=0.853$)} \\
+Method & $\bar r$ & $\hat L_{\mathrm{ref}}$ & $J$ & $S_{\mathrm{agg}}$ & $\bar r$ & $\hat L_{\mathrm{ref}}$ & $J$ & $S_{\mathrm{agg}}$ & $\bar r$ & $\hat L_{\mathrm{ref}}$ & $J$ & $S_{\mathrm{agg}}$ \\
+\hline
+Default 802.11ax & 0.802 & 260.5 & 0.644 & 232.2 & 0.465 & 975.2 & 0.385 & 362.9 & 0.378 & 933.4 & 0.318 & 204.3 \\
+$\epsilon$-greedy & 0.890 & 105.6 & 0.851 & 387.5 & 0.918 & 94.5 & 0.825 & 696.8 & 0.624 & 571.7 & 0.481 & 316.3 \\
+GM-TS \cite{bardou2021improving} & 0.843 & 222.4 & 0.690 & 274.9 & 0.870 & 227.0 & 0.749 & 547.4 & 0.533 & 638.1 & 0.414 & 232.8 \\
+HCM-TS \cite{bardou2023mitigating} & 0.914 & 45.2 & 0.869 & 394.7 & 0.937 & 69.1 & 0.866 & \textbf{1005.8} & 0.739 & 352.3 & 0.602 & 382.4 \\
+INSPIRE \cite{bardou2022inspire} & 0.876 & 135.7 & 0.783 & 349.1 & 0.928 & 80.9 & 0.837 & 627.1 & 0.594 & 529.7 & 0.443 & 200.5 \\
+\hline
+Neural Bandit (GM) & 0.897 & 104.8 & 0.813 & 339.9 & 0.927 & 92.4 & 0.823 & 642.8 & 0.625 & 483.8 & 0.486 & 329.1 \\
+QNN Bandit (GM) & 0.905 & 80.1 & 0.839 & 363.4 & 0.938 & 114.7 & 0.862 & 802.7 & 0.702 & 404.9 & 0.551 & 373.3 \\
+Neural Bandit (HCM) & 0.921 & 24.2 & 0.904 & 415.4 & \textbf{0.949} & \textbf{22.0} & 0.878 & 894.7 & 0.759 & 361.3 & 0.604 & 419.1 \\
+QNN Bandit (HCM) & \textbf{0.921} & \textbf{21.6} & \textbf{0.927} & \textbf{429.8} & 0.948 & 25.5 & \textbf{0.888} & 940.7 & \textbf{0.801} & \textbf{285.0} & \textbf{0.676} & \textbf{430.4} \\
+\hline
+\end{tabular}
+\end{table*}
+
+\begin{table*}[!t]
+\centering
+\caption{Paired Tail-Reward Contrasts Under the GM Sampler. Differences of Cross-Seed Medians with Individual 95\% Percentile Confidence Intervals from 10{,}000 Paired Bootstrap Resamples.}
+\label{tab:contrasts}
+\small
+\begin{tabular}{lccc}
+\hline
+Contrast & C6 & ENT-Clustered & ENT-Dispersed \\
+\hline
+QNN Bandit (GM) $-$ GM-TS & $+0.062$ [$0.041$, $0.073$] & $+0.068$ [$0.058$, $0.096$] & $+0.169$ [$0.117$, $0.194$] \\
+Neural Bandit (GM) $-$ GM-TS & $+0.054$ [$0.022$, $0.063$] & $+0.058$ [$0.039$, $0.078$] & $+0.092$ [$0.042$, $0.132$] \\
+QNN Bandit (GM) $-$ Neural Bandit (GM) & $+0.008$ [$-0.002$, $0.027$] & $+0.011$ [$-0.004$, $0.043$] & $+0.077$ [$0.034$, $0.106$] \\
+\hline
+\end{tabular}
+\end{table*}

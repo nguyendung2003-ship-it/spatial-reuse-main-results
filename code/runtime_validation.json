@@ -1,0 +1,44 @@
+{
+  "status": "pass",
+  "checks": [
+    {
+      "architecture": "mlp_norm",
+      "input_dim": 12,
+      "feature_dim": 32,
+      "feature_parameters": 7072,
+      "feature_max_abs_error": 0.0,
+      "state_dict_bit_identical": true,
+      "mean_feature_norm": 5.656853675842285
+    },
+    {
+      "architecture": "qnn",
+      "input_dim": 12,
+      "feature_dim": 32,
+      "feature_parameters": 1485,
+      "feature_max_abs_error": 0.0,
+      "state_dict_bit_identical": true,
+      "mean_feature_norm": 5.656853675842285
+    },
+    {
+      "architecture": "mlp_norm",
+      "input_dim": 20,
+      "feature_dim": 32,
+      "feature_parameters": 7584,
+      "feature_max_abs_error": 0.0,
+      "state_dict_bit_identical": true,
+      "mean_feature_norm": 5.656854152679443
+    },
+    {
+      "architecture": "qnn",
+      "input_dim": 20,
+      "feature_dim": 32,
+      "feature_parameters": 1741,
+      "feature_max_abs_error": 0.0,
+      "state_dict_bit_identical": true,
+      "mean_feature_norm": 5.656854152679443
+    }
+  ],
+  "main_runtime_class_ast_identical": true,
+  "simulation_run": false,
+  "source_adapter_scope": "portable paths and CLI restrictions; model mathematics unchanged"
+}

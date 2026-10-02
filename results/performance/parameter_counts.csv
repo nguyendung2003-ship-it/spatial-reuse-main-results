@@ -1,0 +1,5 @@
+extractor,access_points,latent_dimension,trainable_feature_parameters,quantum_parameters
+Full-width MLP,6,32,7072,0
+Hybrid classical-quantum,6,32,1485,45
+Full-width MLP,10,32,7584,0
+Hybrid classical-quantum,10,32,1741,45

@@ -1,0 +1,5 @@
+# Python 3.10; CPU torch can be installed via the official CPU wheel index.
+numpy==2.2.6
+torch==2.12.1
+scipy==1.15.3
+matplotlib==3.10.9

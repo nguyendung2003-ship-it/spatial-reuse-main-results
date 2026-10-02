@@ -1,0 +1,194 @@
+{
+  "status": "PASS",
+  "date": "2026-10-02",
+  "archive_simulations_rerun": false,
+  "fresh_ns3_build": "code/build_validation.json",
+  "main_model_numerical_equivalence": "code/runtime_validation.json",
+  "performance_and_inference_verification": "results/verification.json",
+  "figure_reproduction_verification": "results/reproduction_validation.json",
+  "independent_review": {
+    "main_method_topology_rows": 27,
+    "numeric_fields_checked": 108,
+    "max_abs_error_vs_latest_export": 1.14e-13,
+    "config_and_public_cli_match": true,
+    "status": "PASS"
+  },
+  "smoke_checks": [
+    {
+      "method": "default",
+      "topology": "C6o",
+      "physical_seed": 1,
+      "duration_seconds": 1.5,
+      "canonical_comparison_cycles": 21,
+      "raw_output_columns": 22,
+      "finite_metrics": [
+        "rew",
+        "fair",
+        "cum"
+      ],
+      "status": "PASS"
+    },
+    {
+      "method": "epsilon_greedy",
+      "topology": "C6o",
+      "physical_seed": 1,
+      "duration_seconds": 1.5,
+      "canonical_comparison_cycles": 21,
+      "raw_output_columns": 22,
+      "finite_metrics": [
+        "rew",
+        "fair",
+        "cum"
+      ],
+      "status": "PASS"
+    },
+    {
+      "method": "gm_ts",
+      "topology": "C6o",
+      "physical_seed": 1,
+      "duration_seconds": 1.5,
+      "canonical_comparison_cycles": 21,
+      "raw_output_columns": 21,
+      "finite_metrics": [
+        "rew",
+        "fair",
+        "cum"
+      ],
+      "status": "PASS"
+    },
+    {
+      "method": "hcm_ts",
+      "topology": "C6o",
+      "physical_seed": 1,
+      "duration_seconds": 1.5,
+      "canonical_comparison_cycles": 21,
+      "raw_output_columns": 21,
+      "finite_metrics": [
+        "rew",
+        "fair",
+        "cum"
+      ],
+      "status": "PASS"
+    },
+    {
+      "method": "inspire",
+      "topology": "C6o",
+      "physical_seed": 1,
+      "duration_seconds": 1.5,
+      "canonical_comparison_cycles": 21,
+      "raw_output_columns": 22,
+      "finite_metrics": [
+        "rew",
+        "fair",
+        "cum"
+      ],
+      "status": "PASS"
+    },
+    {
+      "method": "neural_gm",
+      "topology": "C6o",
+      "physical_seed": 1,
+      "duration_seconds": 1.5,
+      "canonical_comparison_cycles": 21,
+      "raw_output_columns": 21,
+      "finite_metrics": [
+        "rew",
+        "fair",
+        "cum"
+      ],
+      "status": "PASS"
+    },
+    {
+      "method": "qnn_gm",
+      "topology": "C6o",
+      "physical_seed": 1,
+      "duration_seconds": 1.5,
+      "canonical_comparison_cycles": 21,
+      "raw_output_columns": 21,
+      "finite_metrics": [
+        "rew",
+        "fair",
+        "cum"
+      ],
+      "status": "PASS"
+    },
+    {
+      "method": "neural_hcm",
+      "topology": "C6o",
+      "physical_seed": 1,
+      "duration_seconds": 1.5,
+      "canonical_comparison_cycles": 21,
+      "raw_output_columns": 21,
+      "finite_metrics": [
+        "rew",
+        "fair",
+        "cum"
+      ],
+      "status": "PASS"
+    },
+    {
+      "method": "qnn_hcm",
+      "topology": "C6o",
+      "physical_seed": 1,
+      "duration_seconds": 1.5,
+      "canonical_comparison_cycles": 21,
+      "raw_output_columns": 21,
+      "finite_metrics": [
+        "rew",
+        "fair",
+        "cum"
+      ],
+      "status": "PASS"
+    }
+  ],
+  "training_checks": [
+    {
+      "method": "neural_gm",
+      "topology": "C6o",
+      "physical_seed": 1,
+      "duration_seconds": 7.5,
+      "measurement_cycles": 101,
+      "posterior_observations": 21,
+      "completed_retrainings": 1,
+      "finite_model_and_rewards": true,
+      "status": "PASS"
+    },
+    {
+      "method": "qnn_gm",
+      "topology": "C6o",
+      "physical_seed": 1,
+      "duration_seconds": 7.5,
+      "measurement_cycles": 101,
+      "posterior_observations": 23,
+      "completed_retrainings": 1,
+      "finite_model_and_rewards": true,
+      "status": "PASS"
+    },
+    {
+      "method": "neural_hcm",
+      "topology": "C6o",
+      "physical_seed": 1,
+      "duration_seconds": 7.5,
+      "measurement_cycles": 101,
+      "posterior_observations": 33,
+      "completed_retrainings": 2,
+      "finite_model_and_rewards": true,
+      "status": "PASS"
+    },
+    {
+      "method": "qnn_hcm",
+      "topology": "C6o",
+      "physical_seed": 1,
+      "duration_seconds": 7.5,
+      "measurement_cycles": 101,
+      "posterior_observations": 33,
+      "completed_retrainings": 2,
+      "finite_model_and_rewards": true,
+      "status": "PASS"
+    }
+  ],
+  "experiment_environment_explicit": true,
+  "python_version": "3.10.20",
+  "replay_collection_verification": "configs/collection_validation.json",
+  "native_timing_replay_verification": "configs/native_timing_validation.json"
+}

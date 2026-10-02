@@ -1,0 +1,25 @@
+\begin{table}[t]
+\centering
+\caption{Trainable Parameters of the Main Feature Extractors ($d=32$, $h=64$, $q=5$, $l=3$).}
+\label{tab:param_count}
+\footnotesize
+\begin{tabular}{llrr}
+\toprule
+Component & Formula & $N_A=6$ & $N_A=10$ \\
+\midrule
+\multicolumn{4}{l}{\textit{Full-width MLP}} \\
+Input layer & $2N_Ah+h$ & 832 & 1{,}344 \\
+Hidden layer & $h^2+h$ & 4{,}160 & 4{,}160 \\
+Output layer & $hd+d$ & 2{,}080 & 2{,}080 \\
+\textbf{Total} & & \textbf{7{,}072} & \textbf{7{,}584} \\
+\midrule
+\multicolumn{4}{l}{\textit{Hybrid classical-quantum}} \\
+Encoder & $2^q(2N_A+1)$ & 416 & 672 \\
+Shared SU(4) blocks & $15l$ & 45 & 45 \\
+Readout & $2^qd$ & 1{,}024 & 1{,}024 \\
+\textbf{Total} & & \textbf{1{,}485} & \textbf{1{,}741} \\
+\midrule
+MLP / hybrid & & $4.76\times$ & $4.36\times$ \\
+\bottomrule
+\end{tabular}
+\end{table}

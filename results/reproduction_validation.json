@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "figure_reproduction_panels": 12,
+  "pdf_labels_verified": 12,
+  "loss_endpoints_verified": 27,
+  "frozen_inference_smoke_models": 4,
+  "frozen_inference_smoke_batches": [
+    1,
+    512
+  ],
+  "weights_and_history_unchanged": true,
+  "simulations_run": 0
+}

@@ -1,0 +1,65 @@
+{
+  "status": "complete",
+  "topology": "C6o",
+  "physical_seeds": [
+    1
+  ],
+  "simulated_seconds": 150,
+  "measurement_cycle_seconds": 0.075,
+  "logical_cpu": 31,
+  "source_sha256": {
+    "neural_bandit_bridge/benchmark_runtime.py": "b7c6281a60be0cd48dd406acc561f8bca84d5a6e1baa9b5dd7990b7cd0258430",
+    "ns-allinone-3.35/ns-3.35/build/scratch/nsTest/nsTest": "9f025b6c6db423126fa28bd8f646de0fa367f72296013fba674790eb3f62adb5",
+    "ns-allinone-3.35/ns-3.35/scratch/nsTest/main.cc": "b6f99e6aed993b0ea912ae81e246ce9774030619756324670a32acddf4e59d51",
+    "ns-allinone-3.35/ns-3.35/scratch/nsTest/simulation.cc": "a94b15ae5b31e1300c732149fa8b596af3382e305ca7adc92aaa75d0cc5ecca8",
+    "ns-allinone-3.35/ns-3.35/scratch/nsTest/optimizers.cc": "c19f2a6b8023322b02374dbac9b7ce99c3d9182186f715fe3b847d1b32d2cebc",
+    "ns-allinone-3.35/ns-3.35/scratch/nsTest/optimizers.hh": "fc76e626b015169fd0a89915cca4357a7437b507dd500575759cb80a1ed91090",
+    "ns-allinone-3.35/ns-3.35/scratch/nsTest/samplers.cc": "413e95cce38733e0068537a80cfdd4d1734d87bf83cefc9121754ce8528f31b3",
+    "ns-allinone-3.35/ns-3.35/scratch/nsTest/runtime_timing.hh": "7aac53849c1289d8aa85c7ea5ccf598e4663dea0a85c004aa044e4d113714015",
+    "ns-allinone-3.35/ns-3.35/scratch/nsTest/topos/C6o.json": "10a64f7f45e45e54c618886bcfe87f5d21b9f686c22ba8ee311dd928e5fe7c13"
+  },
+  "scope": "fresh native production controller timing traces across the full horizon; no trained-model microbench concurrency",
+  "groups": [
+    {
+      "run_id": "20261002_current_native_c6",
+      "methods": [
+        "egreedy",
+        "gmts",
+        "inspire"
+      ],
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "NSTEST_INSPIRE_WINDOW": "32",
+        "NSTEST_INSPIRE_RESTARTS": "6",
+        "NSTEST_INSPIRE_SWEEPS": "3",
+        "NSTEST_INSPIRE_HYPER_PERIOD": "10",
+        "NSTEST_TGNORM_ACQUISITION_EPS": "0.0"
+      }
+    },
+    {
+      "run_id": "20261002_current_hcmts_eps01_c6",
+      "methods": [
+        "gmts_ring"
+      ],
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "NSTEST_INSPIRE_WINDOW": "32",
+        "NSTEST_INSPIRE_RESTARTS": "6",
+        "NSTEST_INSPIRE_SWEEPS": "3",
+        "NSTEST_INSPIRE_HYPER_PERIOD": "10",
+        "NSTEST_TGNORM_ACQUISITION_EPS": "0.1",
+        "NSTEST_TGNORM_CANDIDATES": "512",
+        "NSTEST_TGNORM_NOVEL_CANDIDATES": "128",
+        "NSTEST_TGNORM_COLD_START": "20",
+        "NSTEST_TGNORM_CANDIDATE_ATTEMPTS": "50000"
+      }
+    }
+  ],
+  "sources_unchanged": true
+}

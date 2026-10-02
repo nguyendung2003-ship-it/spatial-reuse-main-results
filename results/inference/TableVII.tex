@@ -1,0 +1,28 @@
+\begin{table}[t]
+\centering
+\caption{CPU Latency of Native Controllers and Optimized Frozen Feature Extractors (C6, Seed 1; Bold Indicates the Fastest Feature Extractor).}
+\label{tab:latency}
+\footnotesize
+\setlength{\tabcolsep}{2.8pt}
+\begin{tabular}{@{}llccc@{}}
+\toprule
+& & \multicolumn{3}{c}{\textbf{Latency [ms]}} \\
+\cmidrule(lr){3-5}
+\textbf{Method} & \textbf{Implementation} & \textbf{Mean} & \textbf{Median} & \textbf{P95} \\
+\midrule
+\multicolumn{5}{@{}l@{}}{\textit{Native controller operations}} \\
+$\epsilon$-greedy & C++ & 0.0024 & 0.0022 & 0.0044 \\
+GM-TS & C++ & 0.0107 & 0.0047 & 0.0316 \\
+HCM-TS & C++ & 0.2213 & 0.0511 & 0.9477 \\
+INSPIRE & C++ (custom GP) & 1.8009 & 1.8044 & 1.9041 \\
+\midrule
+\multicolumn{5}{@{}l@{}}{\textit{Optimized frozen feature inference (batch 512)}} \\
+\textbf{Neural Bandit (GM)} & NumPy & \textbf{0.0780} & \textbf{0.0762} & \textbf{0.0857} \\
+Neural Bandit (HCM) & NumPy & 0.0789 & 0.0778 & 0.0856 \\
+QNN Bandit (GM) & C++ + NumPy & 0.2819 & 0.2800 & 0.2919 \\
+QNN Bandit (HCM) & C++ + NumPy & 0.2829 & 0.2799 & 0.3013 \\
+\bottomrule
+\end{tabular}
+\par\vspace{2pt}
+\parbox{\columnwidth}{\scriptsize\emph{Note:} AMD Ryzen 9 9950X3D2, one CPU thread. The blocks time different operations. Native $\epsilon$-greedy, GM-TS and HCM-TS include proposals and action selection; HCM-TS uses $\epsilon_{\mathrm f}=0.1$ with hold calls excluded. INSPIRE measures GP prescription and consensus over a full 32-observation window and excludes GP fitting. Feature inference computes new features for all 512 profiles with frozen trained weights, $d=32$ and 1{,}000 timing repetitions. Bayesian scoring, candidate generation, history scans, retraining and IPC are excluded from this block.}
+\end{table}

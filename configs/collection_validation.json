@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "collector_sha256": "2ddaf1fbf703ec8b46838e65113d8458523f9173c4ad16c01098dd7c2dd8885b",
+  "fixture": "Archived main matrices staged in ignored work; this is an integration fixture, not new simulation data",
+  "simulation_run": false,
+  "full_cells": 27,
+  "input_matrices": 81,
+  "ordered_seed_checks": 27,
+  "untrimmed_output_matrix_bytes_match": 81,
+  "untrimmed_and_trimmed_matrix_numerics_match": 81,
+  "table_v_rows_identical": 27,
+  "table_summary_fields_identical": 108,
+  "analysis_outputs_byte_identical_per_fixture": 6,
+  "native_extra_terminal_column_trimmed": true,
+  "native_retained_cycle_values_exact": true,
+  "learned_extra_terminal_column_rejected": true,
+  "incomplete_and_duplicate_launch_plans_rejected": true,
+  "existing_output_not_overwritten": true
+}

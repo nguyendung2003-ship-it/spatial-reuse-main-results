@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "topologies": {
+    "C6o": {
+      "display_name": "C6",
+      "access_points": 6,
+      "stations": 12
+    },
+    "MER_FLOORS_CH20_S5": {
+      "display_name": "ENT-Clustered",
+      "access_points": 10,
+      "stations": 50
+    },
+    "MER_FLOORS_BAD_DIM": {
+      "display_name": "ENT-Dispersed",
+      "access_points": 10,
+      "stations": 50
+    }
+  },
+  "simulation": {
+    "ns3_version": "3.35",
+    "duration_seconds": 150.0,
+    "measurement_interval_seconds": 0.075,
+    "measurement_cycles": 2001,
+    "channel_width_MHz": 20,
+    "band_GHz": 5.0,
+    "rate_manager": "MINSTREL",
+    "transport": "udp",
+    "reward": "ADHOC",
+    "starvation_gamma": 0.1,
+    "physical_seeds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25
+    ],
+    "agent_seed_offset": 0,
+    "downlink_Mbps_per_station": 50.0,
+    "uplink_Mbps_per_station": 3.3333333333333335,
+    "payload_bytes": 1464,
+    "propagation_model": "LogDistancePropagationLossModel",
+    "propagation_exponent": 3.0
+  },
+  "training": {
+    "cold_start": 20,
+    "early_retrain_interval": 10,
+    "retrain_interval": 20,
+    "max_retrains": -1,
+    "freeze_after_step": -1,
+    "train_epochs": 80,
+    "update_epochs": 0,
+    "batch_size": 64,
+    "lr": 0.001,
+    "weight_decay": 0.0001
+  },
+  "bayesian_head": {
+    "lambda0": 1.0,
+    "alpha0": 0.5,
+    "beta0": 0.025,
+    "latent_dimension": 32
+  },
+  "hcm_sampler": {
+    "hcm_profile": "author-restart",
+    "hcm_global_epsilon": 0.0,
+    "hcm_restart_patience": 48,
+    "hcm_restart_burst": 16,
+    "hcm_restart_max_bursts": 4,
+    "hcm_restart_min_delta": 0.01,
+    "hcm_restart_target": 0.89,
+    "adhoc_tiebreak_weight": 0.0
+  },
+  "native_environment": {
+    "NSTEST_TRANSPORT": "udp",
+    "NSTEST_INSPIRE_WINDOW": 32,
+    "NSTEST_INSPIRE_RESTARTS": 6,
+    "NSTEST_INSPIRE_SWEEPS": 3,
+    "NSTEST_INSPIRE_HYPER_PERIOD": 10
+  },
+  "methods": {
+    "default": {
+      "display_name": "Default 802.11ax",
+      "kind": "native",
+      "runner_label": "idle",
+      "sampler": "UNI",
+      "entry": "DEF"
+    },
+    "epsilon_greedy": {
+      "display_name": "epsilon-greedy",
+      "kind": "native",
+      "runner_label": "egreedy",
+      "sampler": "UNI",
+      "entry": "DEF",
+      "epsilon": 0.1,
+      "ema_old_weight": 0.8
+    },
+    "gm_ts": {
+      "display_name": "GM-TS",
+      "kind": "native",
+      "runner_label": "tgnorm_paper",
+      "sampler": "HGM",
+      "entry": "DEF"
+    },
+    "hcm_ts": {
+      "display_name": "HCM-TS",
+      "kind": "native",
+      "runner_label": "tgnorm_ring",
+      "sampler": "HCM",
+      "entry": "DEGA",
+      "acquisition_epsilon": 0.1,
+      "floor_candidate_cap": 512,
+      "floor_novel_candidates": 128,
+      "cold_start": 20,
+      "native_epsilon": 0.1
+    },
+    "inspire": {
+      "display_name": "INSPIRE",
+      "kind": "native",
+      "runner_label": "inspire",
+      "sampler": "UNI",
+      "entry": "DEF",
+      "window": 32,
+      "restarts": 6,
+      "sweeps": 3,
+      "hyperparameter_period": 10
+    },
+    "neural_gm": {
+      "kind": "learned",
+      "candidates": 512,
+      "quantum_lr": 0.003,
+      "feature_diagnostics": true,
+      "display_name": "Neural Bandit (GM)",
+      "surrogate": "mlp_norm",
+      "sampler": "HGM",
+      "entry": "DEF",
+      "novel_candidates": 256,
+      "acquisition_epsilon": 0.0,
+      "hcm_profile": "batch"
+    },
+    "qnn_gm": {
+      "kind": "learned",
+      "candidates": 512,
+      "qnn_layers": 3,
+      "qnn_architecture": "qcnn_shared_reupload",
+      "quantum_lr": 0.001,
+      "feature_diagnostics": false,
+      "display_name": "QNN Bandit (GM)",
+      "surrogate": "qnn",
+      "sampler": "HGM",
+      "entry": "DEF",
+      "novel_candidates": 256,
+      "acquisition_epsilon": 0.0,
+      "hcm_profile": "batch"
+    },
+    "neural_hcm": {
+      "kind": "learned",
+      "candidates": 512,
+      "quantum_lr": 0.003,
+      "feature_diagnostics": true,
+      "display_name": "Neural Bandit (HCM)",
+      "surrogate": "mlp_norm",
+      "sampler": "HCM",
+      "entry": "DEGA",
+      "novel_candidates": 128,
+      "acquisition_epsilon": 0.1,
+      "hcm_profile": "author-restart"
+    },
+    "qnn_hcm": {
+      "kind": "learned",
+      "candidates": 512,
+      "qnn_layers": 3,
+      "qnn_architecture": "qcnn_shared_reupload",
+      "quantum_lr": 0.001,
+      "feature_diagnostics": false,
+      "display_name": "QNN Bandit (HCM)",
+      "surrogate": "qnn",
+      "sampler": "HCM",
+      "entry": "DEGA",
+      "novel_candidates": 256,
+      "acquisition_epsilon": 0.1,
+      "hcm_profile": "author-restart"
+    }
+  },
+  "analysis": {
+    "tail_first_cycle": 1901,
+    "tail_last_cycle": 2000,
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 20260923,
+    "frozen_empirical_reference": {
+      "C6o": 0.92556556,
+      "MER_FLOORS_CH20_S5": 0.95215664,
+      "MER_FLOORS_BAD_DIM": 0.85254904
+    }
+  }
+}
